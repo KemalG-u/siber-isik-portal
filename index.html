@@ -62,8 +62,8 @@
             height: auto;
             transform: translate(-50%, -50%);
             z-index: -1;
-            opacity: 0.15;
-            filter: blur(3px) brightness(0.4);
+            opacity: 0.20;
+            filter: blur(2px) brightness(0.5) saturate(1.3);
             object-fit: cover;
         }
 
@@ -86,33 +86,40 @@
         }
 
         .header h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            background: linear-gradient(45deg, #FFD700, #40E0D0, #9370DB);
+            font-size: 4rem;
+            font-weight: 200;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #FFD700, #FFFFFF, #40E0D0, #FFD700);
+            background-size: 300% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            animation: shimmer 4s ease-in-out infinite;
+            margin-bottom: 25px;
+            text-shadow: none;
         }
 
-        @keyframes glow {
-
-            0%,
-            100% {
-                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 50%;
             }
 
             50% {
-                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.6));
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
             }
         }
 
         .header p {
-            font-size: 1.2rem;
-            color: #C0C0C0;
-            letter-spacing: 1px;
+            font-size: 1.4rem;
+            color: rgba(192, 192, 192, 0.9);
+            letter-spacing: 4px;
+            font-weight: 300;
+            text-transform: uppercase;
         }
 
         /* Session Cards Container */
@@ -126,16 +133,18 @@
 
         /* Session Card */
         .session-card {
-            background: rgba(10, 14, 39, 0.90);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 215, 0, 0.6);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            padding: 40px 30px;
+            background: linear-gradient(145deg, rgba(15, 20, 45, 0.95), rgba(5, 8, 20, 0.98));
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 45px 35px;
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.03) inset;
         }
 
         .session-card::before {
@@ -156,15 +165,44 @@
         }
 
         .session-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.7);
+            box-shadow:
+                0 25px 80px rgba(255, 215, 0, 0.25),
+                0 0 0 1px rgba(255, 215, 0, 0.1) inset,
+                0 0 60px rgba(255, 215, 0, 0.1);
         }
 
         .session-card .icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 15px currentColor);
+            font-size: 5rem;
+            margin-bottom: 25px;
+            display: block;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px currentColor);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-12px) scale(1.05);
+            }
+        }
+
+        .session-card.session-1 .icon {
+            animation-delay: 0s;
+        }
+
+        .session-card.session-2 .icon {
+            animation-delay: 0.5s;
+        }
+
+        .session-card.session-final .icon {
+            animation-delay: 1s;
         }
 
         .session-card.session-1 .icon {
@@ -212,20 +250,30 @@
 
         .session-card .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+            background-size: 200% 100%;
             color: #000;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 16px 50px;
+            border-radius: 35px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            box-shadow:
+                0 8px 30px rgba(255, 215, 0, 0.4),
+                0 0 0 2px rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+            background-position: 100% 0;
+            transform: translateY(-3px);
+            box-shadow:
+                0 15px 40px rgba(255, 215, 0, 0.5),
+                0 0 0 3px rgba(255, 215, 0, 0.2);
         }
 
         /* Responsive */
