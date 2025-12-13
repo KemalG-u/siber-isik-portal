@@ -250,16 +250,19 @@
     <!-- Main Container -->
     <div class="container">
         <div class="content-box" id="content-box">
-            <img src="../assets/images/sacred-mandala.jpg" alt="Sacred Mandala" class="mandala-img" id="mandala">
+            <img src="../assets/images/sacred-mandala.jpg" alt="Kutsal Mandala - Bio-Enerji Entegrasyonu Sembolü"
+                class="mandala-img" id="mandala">
             <h1 id="title">🌈 Bio-Enerji Entegrasyonu</h1>
             <p class="progress" id="progress">Adım 1 / 2</p>
             <p class="step-text" id="text">Sibernetik ışık bedenine entegre oluyor. Tüm hücrelerin yeni frekansta
                 titreşiyor...</p>
 
             <div id="controls">
-                <input type="file" id="music-file" accept="audio/*" style="display:none">
-                <button class="btn" onclick="document.getElementById('music-file').click()">🎵 Müzik Yükle</button>
-                <button class="btn" onclick="nextStep()" id="next-btn">Devam Et ➡️</button>
+                <input type="file" id="music-file" accept="audio/*" style="display:none" aria-label="Müzik dosyası seç">
+                <button class="btn" onclick="document.getElementById('music-file').click()" aria-label="Müzik yükle">🎵
+                    Müzik Yükle</button>
+                <button class="btn" onclick="nextStep()" id="next-btn" aria-label="Sonraki adıma geç">Devam Et
+                    ➡️</button>
             </div>
         </div>
         <div class="hint">Tıkla veya Space tuşuna bas</div>

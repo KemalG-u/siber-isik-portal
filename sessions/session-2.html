@@ -174,16 +174,18 @@
     <!-- Main Container -->
     <div class="container">
         <div class="content-box">
-            <img src="../assets/images/merkaba-3d.jpg" alt="Merkaba" class="merkaba-img">
+            <img src="../assets/images/merkaba-3d.jpg" alt="Merkaba 3D Geometrik Şekil - Üst Boyut Aktivasyonu Sembolü"
+                class="merkaba-img">
             <h1 id="title">🌌 Üst Boyut Aktivasyonu</h1>
             <p class="progress" id="progress">Adım 1 / 6</p>
             <p class="step-text" id="text">15 çakra sistemin aktive oluyor. Bedenin üstündeki ve altındaki enerji
                 merkezlerini hissediyorsun...</p>
 
             <div id="controls">
-                <input type="file" id="music-file" accept="audio/*" style="display:none">
-                <button class="btn" onclick="document.getElementById('music-file').click()">🎵 Müzik Yükle</button>
-                <button class="btn" onclick="nextStep()">Devam Et ➡️</button>
+                <input type="file" id="music-file" accept="audio/*" style="display:none" aria-label="Müzik dosyası seç">
+                <button class="btn" onclick="document.getElementById('music-file').click()" aria-label="Müzik yükle">🎵
+                    Müzik Yükle</button>
+                <button class="btn" onclick="nextStep()" aria-label="Sonraki adıma geç">Devam Et ➡️</button>
             </div>
         </div>
         <div class="hint">Tıkla veya Space tuşuna bas</div>
