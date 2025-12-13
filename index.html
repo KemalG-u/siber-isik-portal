@@ -53,6 +53,22 @@
             z-index: 0;
         }
 
+        /* Background Video */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(2px);
+            object-fit: cover;
+        }
+
         /* Main Container */
         .container {
             position: relative;
@@ -239,6 +255,11 @@
 <body>
     <!-- Custom Cursor -->
     <div id="cursor"></div>
+
+    <!-- Background Video -->
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1765643159/Full_Hd_tiqeoq.mp4" type="video/mp4">
+    </video>
 
     <!-- 3D Background Canvas -->
     <canvas id="canvas-3d"></canvas>
