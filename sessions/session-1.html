@@ -251,6 +251,19 @@
             transform: translate(-50%, -50%);
             opacity: 0.3;
         }
+
+        /* Chakra Icons Background */
+        #chakra-icons-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            opacity: 0.15;
+            filter: blur(1px);
+            z-index: 0;
+        }
     </style>
 </head>
 
@@ -307,6 +320,7 @@
 
     <!-- 6. Chakra Cleansing Screen -->
     <div class="screen" id="chakra-screen">
+        <img src="../assets/images/7-chakras-icons.jpg" alt="7 Çakra İkonları" id="chakra-icons-bg">
         <canvas id="mandala-canvas"></canvas>
         <div style="display: flex; align-items: center; justify-content: center;">
             <div id="chakra-body"></div>
