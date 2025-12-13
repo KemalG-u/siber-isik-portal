@@ -264,6 +264,46 @@
             filter: blur(1px);
             z-index: 0;
         }
+
+        /* New Meditation Screens - Video Background */
+        .session-bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.3;
+            filter: blur(2px);
+            object-fit: cover;
+        }
+
+        /* Meditation Content Overlay */
+        .meditation-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        .meditation-content .main-text {
+            font-size: 2rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        .meditation-content .sub-text {
+            font-size: 1.3rem;
+            color: #E0E0E0;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
     </style>
 </head>
 
@@ -304,10 +344,14 @@
 
     <!-- 4. Body Scan Screen -->
     <div class="screen" id="body-screen">
-        <div id="body-container">
+        <video autoplay loop muted playsinline
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: cover; opacity: 0.25; filter: blur(3px); z-index: 0;">
+            <source src="../assets/videos/golden-cleansing.mov" type="video/quicktime">
+        </video>
+        <div id="body-container" style="position: relative; z-index: 1;">
             <div id="body-light"></div>
         </div>
-        <div id="body-text">Bedenin taranıyor...</div>
+        <div id="body-text" style="position: relative; z-index: 1;">Bedenin taranıyor...</div>
     </div>
 
     <!-- 5. Transition Screen -->
@@ -330,7 +374,72 @@
         <div class="hint-text">Tıkla veya Space tuşuna bas</div>
     </div>
 
-    <!-- Audio Element -->
+    <!-- 7. Trauma Cleansing Screen -->
+    <div class="screen" id="trauma-screen">
+        <video class="session-bg-video" autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1734117/spiritual-enlightenment.mov"
+                type="video/mp4">
+        </video>
+        <div class="meditation-content">
+            <p class="main-text" id="trauma-text">Temizlik başlıyor...</p>
+            <p class="sub-text" id="trauma-subtext">Hazır ol...</p>
+        </div>
+        <div class="hint-text">Tıkla veya Space</div>
+    </div>
+
+    <!-- 8. Love Blocks Screen -->
+    <div class="screen" id="love-screen">
+        <video class="session-bg-video" autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1734117/spiritual-enlightenment.mov"
+                type="video/mp4">
+        </video>
+        <div class="meditation-content">
+            <p class="main-text" id="love-text">Aşk bloklarına</p>
+            <p class="sub-text" id="love-subtext">ulaşıyorsun...</p>
+        </div>
+        <div class="hint-text">Tıkla veya Space</div>
+    </div>
+
+    <!-- 9. Karmic Burdens Screen -->
+    <div class="screen" id="karma-screen">
+        <video class="session-bg-video" autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1734117/spiritual-enlightenment.mov"
+                type="video/mp4">
+        </video>
+        <div class="meditation-content">
+            <p class="main-text" id="karma-text">Karmik yükler...</p>
+            <p class="sub-text" id="karma-subtext">temizleniyor...</p>
+        </div>
+        <div class="hint-text">Tıkla veya Space</div>
+    </div>
+
+    <!-- 10. Energy Channels Screen -->
+    <div class="screen" id="channels-screen">
+        <video class="session-bg-video" autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1734117/spiritual-enlightenment.mov"
+                type="video/mp4">
+        </video>
+        <div class="meditation-content">
+            <p class="main-text" id="channels-text">Enerji kanalları...</p>
+            <p class="sub-text" id="channels-subtext">açılıyor...</p>
+        </div>
+        <div class="hint-text">Tıkla veya Space</div>
+    </div>
+
+    <!-- 11. Meridian System Screen -->
+    <div class="screen" id="meridian-screen">
+        <video class="session-bg-video" autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1734117/spiritual-enlightenment.mov"
+                type="video/mp4">
+        </video>
+        <div class="meditation-content">
+            <p class="main-text" id="meridian-text">Meridyenler...</p>
+            <p class="sub-text" id="meridian-subtext">temizleniyor...</p>
+        </div>
+        <div class="hint-text">Tıkla veya Space</div>
+    </div>
+
+
     <audio id="bg-music" loop></audio>
     </div>
 
@@ -569,6 +678,31 @@
             chakraStep++;
             if (chakraStep < chakraData.length) {
                 updateChakra();
+            } else {
+                // Chakra complete, move to trauma screen
+                switchScreen('trauma-screen');
+                initNewScreens();
+            }
+        }
+
+        // ==================== NEW SCREENS INTERACTION ====================
+        let currentNewScreen = 0;
+        const newScreens = ['trauma-screen', 'love-screen', 'karma-screen', 'channels-screen', 'meridian-screen'];
+
+        function initNewScreens() {
+            document.addEventListener('click', advanceNewScreen);
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    advanceNewScreen();
+                }
+            });
+        }
+
+        function advanceNewScreen() {
+            currentNewScreen++;
+            if (currentNewScreen < newScreens.length) {
+                switchScreen(newScreens[currentNewScreen]);
             } else {
                 completeSession();
             }
