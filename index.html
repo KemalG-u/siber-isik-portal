@@ -35,7 +35,7 @@
             pointer-events: none;
             z-index: 9999;
             transition: all 0.1s ease;
-            mix-blend-mode: difference;
+            /* mix-blend-mode: difference; */
         }
 
         #cursor.hover {
@@ -291,7 +291,7 @@
             gsap.to(cursor, {
                 x: e.clientX - 15,
                 y: e.clientY - 15,
-                duration: 0.1
+                duration: 0.02
             });
         });
 
