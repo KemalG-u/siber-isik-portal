@@ -22,19 +22,7 @@
             background: #000;
             color: #F0F0F0;
             overflow: hidden;
-            cursor: none;
-        }
-
-        /* Custom Cursor */
-        #cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #FFD700;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
+            cursor: default;
         }
 
         /* Video Background */
@@ -266,8 +254,7 @@
 </head>
 
 <body>
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
+
 
     <!-- Background Video -->
     <video id="bg-video" autoplay loop muted playsinline>
@@ -338,11 +325,7 @@
         let chakraStep = 0;
         const music = document.getElementById('bg-music');
 
-        // ==================== CUSTOM CURSOR ====================
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = (e.clientX - 10) + 'px';
-            cursor.style.top = (e.clientY - 10) + 'px';
+        // ==================== CUSTOM CURSOR REMOVED ====================
         });
 
         // ==================== MUSIC LOADING ====================

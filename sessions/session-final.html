@@ -24,7 +24,7 @@
             animation: gradient-flow 15s ease infinite;
             color: #F0F0F0;
             overflow: hidden;
-            cursor: none;
+            cursor: default;
         }
 
         @keyframes gradient-flow {
@@ -39,18 +39,7 @@
             }
         }
 
-        /* Custom Cursor */
-        #cursor {
-            position: fixed;
-            width: 25px;
-            height: 25px;
-            border: 2px solid #FFD700;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            box-shadow: 0 0 15px #FFD700;
-        }
+
 
         /* Video Background */
         #bg-video {
@@ -246,8 +235,7 @@
 </head>
 
 <body>
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
+
 
     <!-- Background Video -->
     <video id="bg-video" autoplay loop muted playsinline>
@@ -279,12 +267,7 @@
     <audio id="bg-music" loop></audio>
 
     <script>
-        // ==================== CUSTOM CURSOR ====================
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = (e.clientX - 12.5) + 'px';
-            cursor.style.top = (e.clientY - 12.5) + 'px';
-        });
+        // ==================== CUSTOM CURSOR REMOVED ====================
 
         // ==================== MUSIC ====================
         const music = document.getElementById('bg-music');
