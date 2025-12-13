@@ -273,7 +273,7 @@
 
             <!-- Session Final -->
             <div class="session-card session-final">
-                <div class="icon">🌈</div>
+                <div class="icon">💎</div>
                 <h2>Bio-Enerji Entegrasyonu</h2>
                 <p class="step-count">2 Adım</p>
                 <p>Sibernetik ışık bedenine entegre oluyor. Yeni zaman çizgisine atlıyorsun.</p>
@@ -288,11 +288,8 @@
         const links = document.querySelectorAll('a, .session-card');
 
         document.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, {
-                x: e.clientX - 15,
-                y: e.clientY - 15,
-                duration: 0.02
-            });
+            cursor.style.left = (e.clientX - 15) + 'px';
+            cursor.style.top = (e.clientY - 15) + 'px';
         });
 
         links.forEach(link => {
