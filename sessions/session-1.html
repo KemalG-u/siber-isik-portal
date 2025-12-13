@@ -35,9 +35,10 @@
             width: auto;
             height: auto;
             transform: translate(-50%, -50%);
-            z-index: 0;
-            opacity: 0.4;
-            filter: blur(3px);
+            z-index: -1;
+            opacity: 0.2;
+            filter: blur(3px) brightness(0.5);
+            object-fit: cover;
         }
 
         /* Main Container */
@@ -258,8 +259,7 @@
 
     <!-- Background Video -->
     <video id="bg-video" autoplay loop muted playsinline>
-        <source src="../assets/videos/golden-cleansing.mov" type="video/quicktime">
-        <source src="../assets/videos/golden-cleansing.mov" type="video/mp4">
+        <source src="https://res.cloudinary.com/dzegofdgp/video/upload/v1765643159/Full_Hd_tiqeoq.mp4" type="video/mp4">
     </video>
 
     <!-- 1. Info Screen -->
