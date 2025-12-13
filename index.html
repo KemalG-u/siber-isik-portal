@@ -22,26 +22,10 @@
             background: linear-gradient(135deg, #0a0e27 0%, #000000 100%);
             color: #F0F0F0;
             overflow-x: hidden;
-            cursor: none;
+            cursor: default;
         }
 
-        /* Custom Cursor */
-        #cursor {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            border: 2px solid #FFD700;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            /* mix-blend-mode: difference; */
-        }
 
-        #cursor.hover {
-            transform: scale(1.5);
-            border-color: #40E0D0;
-        }
 
         /* 3D Canvas Background */
         #canvas-3d {
@@ -64,8 +48,8 @@
             height: auto;
             transform: translate(-50%, -50%);
             z-index: -1;
-            opacity: 0.3;
-            filter: blur(2px);
+            opacity: 0.15;
+            filter: blur(3px) brightness(0.4);
             object-fit: cover;
         }
 
@@ -128,9 +112,10 @@
 
         /* Session Card */
         .session-card {
-            background: rgba(10, 14, 39, 0.6);
+            background: rgba(10, 14, 39, 0.90);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
@@ -211,32 +196,21 @@
         }
 
         .session-card .btn {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            color: #FFD700;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
             display: inline-block;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
         }
 
-        .session-card.session-2 .btn {
-            background: linear-gradient(135deg, rgba(64, 224, 208, 0.2), rgba(64, 224, 208, 0.1));
-            border-color: rgba(64, 224, 208, 0.4);
-            color: #40E0D0;
-        }
-
-        .session-card.session-final .btn {
-            background: linear-gradient(135deg, rgba(147, 112, 219, 0.2), rgba(147, 112, 219, 0.1));
-            border-color: rgba(147, 112, 219, 0.4);
-            color: #9370DB;
-        }
-
-        .session-card .btn:hover {
+        .btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 20px currentColor;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
         }
 
         /* Responsive */
@@ -253,8 +227,7 @@
 </head>
 
 <body>
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
+
 
     <!-- Background Video -->
     <video id="bg-video" autoplay loop muted playsinline>
@@ -304,19 +277,7 @@
     </div>
 
     <script>
-        // ==================== CUSTOM CURSOR ====================
-        const cursor = document.getElementById('cursor');
-        const links = document.querySelectorAll('a, .session-card');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = (e.clientX - 15) + 'px';
-            cursor.style.top = (e.clientY - 15) + 'px';
-        });
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+        // ==================== CUSTOM CURSOR REMOVED ====================
 
         // ==================== 3D SPACE BACKGROUND ====================
         const canvas = document.getElementById('canvas-3d');
