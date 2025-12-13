@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ders 1: Enerji Sisteminin Temelleri | Siber Işık Portal</title>
+
+    <!-- GSAP Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a1a 100%);
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #ffd700, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            opacity: 0.8;
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 80px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        /* Placeholder */
+        .placeholder {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(155, 89, 182, 0.3);
+            border-radius: 8px;
+            padding: 60px;
+            text-align: center;
+            color: #9b59b6;
+            font-size: 1.2rem;
+        }
+
+        /* Accordion */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .accordion-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .accordion-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .accordion-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .accordion-title {
+            flex: 1;
+        }
+
+        .accordion-title h3 {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .accordion-title p {
+            font-size: 0.95rem;
+            color: #9b59b6;
+            opacity: 0.8;
+        }
+
+        .accordion-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: #ffd700;
+        }
+
+        .accordion-item.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion-body {
+            padding: 0 25px 25px 65px;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid transparent;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab.active {
+            background: rgba(255, 255, 255, 0.08);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chakra-info {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .chakra-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .chakra-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .detail-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffd700;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layer-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .layer-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.1);
+        }
+
+        .color-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .layer-card h3 {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .layer-info {
+            margin-top: 15px;
+        }
+
+        .layer-info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .layer-info strong {
+            color: #9b59b6;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #ffd700, #9b59b6);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: calc(50% + 40px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: calc(50% + 40px);
+            text-align: right;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0a0a1a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .timeline-content p {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .duration-badge {
+            display: inline-block;
+            background: rgba(155, 89, 182, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #9b59b6;
+            border: 1px solid #9b59b6;
+        }
+
+        .total-time {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* Pyramid */
+        .pyramid-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .pyramid-level {
+            margin: 8px auto;
+            padding: 12px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .pyramid-level:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .pyramid-level-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 80px;
+        }
+
+        .level-name {
+            flex: 1;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .level-icon {
+            font-size: 1.3rem;
+            min-width: 40px;
+            text-align: right;
+        }
+
+        /* Critical threshold */
+        .critical-threshold {
+            border: 3px solid #ffd700 !important;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
+            }
+        }
+
+        .threshold-divider {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            border-top: 2px solid #ffd700;
+            border-bottom: 2px solid #ffd700;
+            font-size: 1.2rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* Ability Cards */
+        .ability-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .ability-card {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(75, 0, 130, 0.1));
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ability-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: rgba(155, 89, 182, 0.8);
+            box-shadow: 0 10px 40px rgba(155, 89, 182, 0.5);
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(75, 0, 130, 0.2));
+        }
+
+        .ability-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.5));
+        }
+
+        .ability-card h3 {
+            color: #9b59b6;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .ability-card p {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .chakra-badge {
+            display: inline-block;
+            background: rgba(155, 89, 182, 0.2);
+            border: 1px solid #9b59b6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #9b59b6;
+        }
+
+        @media (max-width: 1024px) {
+            .ability-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ability-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Week Cards */
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .week-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .week-card:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .week-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .week-card h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .week-duration {
+            background: rgba(155, 89, 182, 0.2);
+            border: 1px solid #9b59b6;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #9b59b6;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .week-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .week-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .week-card li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+
+        /* Intention Box */
+        .intention-box {
+            max-width: 800px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(155, 89, 182, 0.1));
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .intention-quote {
+            font-size: 3rem;
+            color: #ffd700;
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .intention-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        .lesson-footer {
+            background: rgba(26, 26, 46, 0.8);
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer-progress {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-btn {
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #0a0a1a;
+            border-color: #ffd700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .btn-disabled {
+            background: rgba(100, 100, 100, 0.3);
+            color: #666;
+            border-color: #444;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            .accordion-body {
+                padding-left: 25px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 80px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>✨ Ders 1: Enerji Sisteminin Temelleri</h1>
+        <p>Çakralardan Aurik Alanlara, Bilincin Yükselişine Kapsamlı Rehber</p>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="#bolum1" class="nav-link">📋 Uyumlamalar</a>
+            <a href="#bolum2" class="nav-link">🌀 Çakralar</a>
+            <a href="#bolum3" class="nav-link">🌟 Aurik Alanlar</a>
+            <a href="#bolum4" class="nav-link">🔮 12 Şifa Adımı</a>
+            <a href="#bolum5" class="nav-link">📊 Bilinç Seviyeleri</a>
+            <a href="#bolum6" class="nav-link">✨ Psişik Yetenekler</a>
+            <a href="#bolum7" class="nav-link">📖 Çalışma Yöntemi</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Section 1: Uyumlamalar -->
+        <section id="bolum1">
+            <h2><span class="section-icon">📋</span> Bölüm 1: Uyumlamalar (19 Adet)</h2>
+
+            <div class="accordion">
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🔬</span>
+                        <div class="accordion-title">
+                            <h3>Hücresel Temizlik Uyumlaması</h3>
+                            <p>Hücrelerdeki negatif enerji kalıntılarını temizler</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Yüksek frekanslı enerji hücrelere akıtılır, düşük frekans
+                                duman gibi çıkar, yerine altın ışık dolar.</p>
+                            <p><strong>Uygulama:</strong> Nefes çalışması ile birlikte görselleştirme yapılır. Beyaz
+                                ışığın tüm hücrelere yayıldığını hayal edin.</p>
+                            <p><strong>Süre:</strong> 5-10 dakika</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🌈</span>
+                        <div class="accordion-title">
+                            <h3>Çakra Temizliği ve Dengeleme</h3>
+                            <p>7 ana çakranın blokajlarını açar</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Her çakra kendi renginde ışıkla temizlenir ve dengelenir.</p>
+                            <p><strong>Belirtiler:</strong> Bloke çakralarda ağırlık, gerginlik veya uyuşukluk
+                                hissedilebilir.</p>
+                            <p><strong>Sonuç:</strong> Enerji akışının düzenlenmesi, duygusal ve fiziksel denge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">✨</span>
+                        <div class="accordion-title">
+                            <h3>Aurik Alan Temizliği</h3>
+                            <p>7 katmanlı enerji alanını temizler</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Beden etrafındaki 7 aurik katmanı negatif enerjilerden
+                                arındırır.</p>
+                            <p><strong>Katmanlar:</strong> Eterik, Duygusal, Mental, Astral, Eterik Şablon, Göksel,
+                                Keteric</p>
+                            <p><strong>Fayda:</strong> Enerji vampirizmine karşı koruma, duygusal berraklık.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">⛓️</span>
+                        <div class="accordion-title">
+                            <h3>Karmik Yük Temizliği</h3>
+                            <p>Geçmiş yaşam karmalarını temizler</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Mor alev (Violet Flame) ile geçmiş yaşam ve ata karmalarını
+                                dönüştürür.</p>
+                            <p><strong>Teknik:</strong> Mor ışık görselleştirmesi ile eski kalıpların yakılması.</p>
+                            <p><strong>Etki:</strong> Tekrarlayan olumsuz yaşam kalıplarından kurtulma.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 5 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">💔</span>
+                        <div class="accordion-title">
+                            <h3>Travma Salımı</h3>
+                            <p>Hücresel travmaları serbest bırakır</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Bedende saklı travmatik anıları serbest bırakır.</p>
+                            <p><strong>Travma noktaları:</strong></p>
+                            <ul>
+                                <li>Omurga: Korkular</li>
+                                <li>Kalça: Cinsel travma</li>
+                                <li>Omuzlar: Sorumluluk yükü</li>
+                                <li>Çene: Bastırılmış öfke</li>
+                                <li>Göğüs: Kalp kırıklığı</li>
+                            </ul>
+                            <p><strong>Süreç:</strong> Nefes, ses (inleme/ağlama), hareket ile travma enerjisi akıtılır.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 6 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🧬</span>
+                        <div class="accordion-title">
+                            <h3>DNA Aktivasyonu (12 Sarmal)</h3>
+                            <p>Atıl DNA sarmallarını aktive eder. 2 sarmaldan 12 sarmala yükseliş.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Atıl DNA sarmallarını aktive eder (2→12).</p>
+                            <p><strong>Etkiler:</strong> Sezgi artışı, şifa kapasitesi, boyutsal farkındalık, psişik
+                                yeteneklerin açılması.</p>
+                            <p><strong>Süreç:</strong> Yüksek frekanslı enerji DNA sarmallarına akıtılır ve dormant
+                                (uyuyan) genetik kodlar uyandırılır.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 7 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">👁️</span>
+                        <div class="accordion-title">
+                            <h3>Pineal Bez Aktivasyonu</h3>
+                            <p>Üçüncü gözü (epifiz bezi) aktive eder. Sezgi ve görü kapasitesi artar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Konum:</strong> Beyin merkezi, iki yarımküre arasında.</p>
+                            <p><strong>Etkiler:</strong> Canlı rüyalar, güçlü sezgiler, renk algısı değişimi, spiritüel
+                                vizyonlar.</p>
+                            <p><strong>Temizleme:</strong> Florid, kalsiyum birikim lerinin temizlenmesi önemlidir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 8 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🐍</span>
+                        <div class="accordion-title">
+                            <h3>Kundalini Uyandırma</h3>
+                            <p>Omurga tabanındaki enerjiyi güvenle uyandırır ve yükseltir.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Omurga tabanında uyuyan kundalini enerjisini (yılan gücü)
+                                uyandırıp tüm çakralardan geçirerek taç çakraya yükseltir.</p>
+                            <p><strong>⚠️ Dikkat:</strong> Hazırlıksız uyandırma tehlikeli! Çakralar temizlenmeli, beden
+                                hazır olmalı.</p>
+                            <p><strong>Belirtiler:</strong> Omurgada ısı hissi, enerji dalgaları, beden titremesi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 9 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🔷</span>
+                        <div class="accordion-title">
+                            <h3>Merkaba Aktivasyonu</h3>
+                            <p>Işık bedenini aktive eder. İç içe dönen tetrahedronlar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Işık bedeni (Merkaba) aktive edilir. Bu, boyutlar arası
+                                seyahat aracıdır.</p>
+                            <p><strong>Geometri:</strong> İç içe 2 tetrahedron (biri yukarı, biri aşağı) - biri saat
+                                yönünde, diğeri ters yönde döner.</p>
+                            <p><strong>Fayda:</strong> Kozmik koruma, boyutsal seyahat, yüksek frekanslara erişim.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 10 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">💎</span>
+                        <div class="accordion-title">
+                            <h3>Işık Dili Aktivasyonu</h3>
+                            <p>Geometrik sembol ve frekans algısını açar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Kutsal geometri sembollerini (Çiçek of Hayat, Metatron Küpü,
+                                vb.) hissetme ve kullanma yeteneği açılır.</p>
+                            <p><strong>Belirtiler:</strong> Meditasyonda geometrik şekiller görme, titreşim/frekans
+                                algısı, sembolik iletişim.</p>
+                            <p><strong>Kullanım:</strong> Şifa, koruma, manifestasyon için semboller kullanılabilir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 11 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🛡️</span>
+                        <div class="accordion-title">
+                            <h3>Psişik Koruma Kalkanı</h3>
+                            <p>Negatif enerjilere karşı koruma kalkanı oluşturur.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Türler:</strong> Altın küre, ayna kalkan, mor alev, melek kanadı koruma.</p>
+                            <p><strong>Kullanım:</strong> Kalabalık yerlerde, negatif kişilerle karşılaşmada, enerji
+                                çalışmalarında.</p>
+                            <p><strong>Süre:</strong> 24 saat aktif kalabilir, günde 1 kez yenilenmelidir.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 12 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🌳</span>
+                        <div class="accordion-title">
+                            <h3>Topraklama (Grounding)</h3>
+                            <p>Yüksek enerjileri topraklar, dengeyi sağlar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Yüksek frekanslı enerjileri dengeler, baş dönmesi ve kaygıyı
+                                azaltır.</p>
+                            <p><strong>Teknik:</strong> Ayaklardan toprağa kök salma visualizasyonu.</p>
+                            <p><strong>Önemli:</strong> Her yüksek enerji çalışmasından sonra topraklama yapılmalıdır.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 13 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">💠</span>
+                        <div class="accordion-title">
+                            <h3>Kristal Kafes Aktivasyonu</h3>
+                            <p>Bedenin kristal enerji yapısını aktive eder.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Bedenin kristal yapısını (silikon bazlı) aktive eder, karbon
+                                bazlı yoğunluktan çıkar.</p>
+                            <p><strong>Etki:</strong> Fiziksel yoğunluğun azalması, ışık bedene geçiş.</p>
+                            <p><strong>Seviye:</strong> İleri seviye aktivasyon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 14 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🌟</span>
+                        <div class="accordion-title">
+                            <h3>Işık Sütunu Bağlantısı</h3>
+                            <p>Göksel ışık sütunuyla bağlantı kurar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Taç çakradan yukarı, galaktik merkeze kadar uzanan ışık sütunu
+                                oluşturur.</p>
+                            <p><strong>Fayda:</strong> Yüksek rehberlerle bağlantı, kozmik bilgi indirimi.</p>
+                            <p><strong>Hissedilen:</strong> Baş tepesinde basınç, ışık akışı hissi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 15 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">📚</span>
+                        <div class="accordion-title">
+                            <h3>Akashik Kayıt Erişimi</h3>
+                            <p>Evrensel bilgi kütüphanesine erişim sağlar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Akashik kayıtlar (evrensel hafıza) erişimi açılır.</p>
+                            <p><strong>Görülebilen:</strong> Geçmiş yaşamlar, ruhsal misyon, gelecek olasılıklar.</p>
+                            <p><strong>Teknik:</strong> Meditasyonda niyet ile kayıtları açma.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 16 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">⏳</span>
+                        <div class="accordion-title">
+                            <h3>Zaman Çizgisi Şifası</h3>
+                            <p>Geçmiş ve gelecek zaman çizgilerini iyileştirir.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Geçmiş travmalar şimdiden şifa bulur, gelecek olasılıklar
+                                iyileştirilir.</p>
+                            <p><strong>Teknik:</strong> Zaman çizgisi üzerinde geri/ileri gidip olay noktalarını şifa
+                                enerjisi ile doldurma.</p>
+                            <p><strong>Sonuç:</strong> Geçmiş acıların etkisi azalır, gelecek pozitif olasılıklara
+                                açılır.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 17 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🌀</span>
+                        <div class="accordion-title">
+                            <h3>Paralel Gerçeklik Entegrasyonu</h3>
+                            <p>Paralel versiyonlarınla bütünleşme sağlar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Paralel evrenlerdeki farklı versiyonlarınızdan bilgi ve
+                                yetenek entegrasyonu.</p>
+                            <p><strong>Fayda:</strong> Daha bütün hale gelme, farklı yeteneklerin birleşmesi.</p>
+                            <p><strong>Seviye:</strong> Çok ileri seviye, kuantum şifa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 18 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">⭐</span>
+                        <div class="accordion-title">
+                            <h3>Yıldız Tohumu Aktivasyonu</h3>
+                            <p>Galaktik kökenlerle bağlantıyı açar.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> Yıldız tohumları (Starseed) galaktik ailelerle bağlantı kurar.
+                            </p>
+                            <p><strong>Sistemler:</strong> Pleiades, Sirius, Arcturus, Andromeda vb.</p>
+                            <p><strong>Etki:</strong> Kozmik misyonun hatırlanması, galaktik rehberlerle iletişim.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 19 -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon">🌌</span>
+                        <div class="accordion-title">
+                            <h3>Kozmik DNA Aktivasyonu</h3>
+                            <p>En yüksek seviye DNA potansiyelini aktive eder.</p>
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Ne yapar:</strong> 12 sarmalın ötesinde, kozmik DNA katmanlarını aktive eder (24,
+                                48, 144 sarmal).</p>
+                            <p><strong>Etki:</strong> Tam potansiyel aktivasyonu, master seviye yetenekler.</p>
+                            <p><strong>Not:</strong> En yüksek seviye aktivasyon, uzun süreçtir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Çakralar -->
+        <section id="bolum2">
+            <h2><span class="section-icon">🌀</span> Bölüm 2: Çakra Sistemi (15 Çakra)</h2>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="kök" style="border-color: #ff0000;">🔴 Kök Çakra</div>
+                <div class="tab" data-tab="sakral" style="border-color: #ff8c00;">🟠 Sakral</div>
+                <div class="tab" data-tab="solar" style="border-color: #ffd700;">🟡 Solar Plexus</div>
+                <div class="tab" data-tab="kalp" style="border-color: #00ff00;">🟢 Kalp</div>
+                <div class="tab" data-tab="boğaz" style="border-color: #00bfff;">🔵 Boğaz</div>
+                <div class="tab" data-tab="üçüncü" style="border-color: #8b00ff;">🟣 Üçüncü Göz</div>
+                <div class="tab" data-tab="taç" style="border-color: #e6e6fa;">⚪ Taç</div>
+            </div>
+
+            <!-- Tab Content: Kök Çakra -->
+            <div class="tab-content active" id="kök">
+                <div class="chakra-info" style="border-color: #ff0000;">
+                    <h3 style="color: #ff0000;">🔴 Kök Çakra (Muladhara)</h3>
+                    <p><strong>İşlev:</strong> Güvenlik, topraklama, hayatta kalma içgüdüsü</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Kuyruk sokumu
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Kırmızı
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Toprak
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            LAM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            396 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Güvende hissetme, enerji, maddi refah
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Korku, maddi sorun, kronik yorgunluk
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Kırmızı giysi, doğa yürüyüşü, kök sebzeler
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Sakral -->
+            <div class="tab-content" id="sakral">
+                <div class="chakra-info" style="border-color: #ff8c00;">
+                    <h3 style="color: #ff8c00;">🟠 Sakral Çakra (Svadhisthana)</h3>
+                    <p><strong>İşlev:</strong> Yaratıcılık, cinsellik, duygusal akış</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Göbek altı
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Turuncu
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Su
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            VAM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            417 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Yaratıcı akış, zevk alma, sağlıklı cinsellik
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Yaratıcı tıkanıklık, suçluluk, bağımlılıklar
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Su aktiviteleri, dans, turuncu meyveler
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Solar Plexus -->
+            <div class="tab-content" id="solar">
+                <div class="chakra-info" style="border-color: #ffd700;">
+                    <h3 style="color: #ffd700;">🟡 Solar Plexus Çakra (Manipura)</h3>
+                    <p><strong>İşlev:</strong> Güç, özgüven, kişisel irade</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Mide bölgesi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Sarı
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Ateş
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            RAM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            528 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Özgüven, motivasyon, güçlü irade
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Düşük özgüven, kontrol sorunu, sindirim problemleri
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Güneş ışığı, sarı çiçekler, öz disiplin
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Kalp -->
+            <div class="tab-content" id="kalp">
+                <div class="chakra-info" style="border-color: #00ff00;">
+                    <h3 style="color: #00ff00;">🟢 Kalp Çakrası (Anahata)</h3>
+                    <p><strong>İşlev:</strong> Sevgi, şefkat, bağışlama</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Göğüs merkezi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Yeşil/Pembe
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Hava
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            YAM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            639 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Koşulsuz sevgi, affetme, empati
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Kalp kırıklığı, kıskançlık, soğukluk
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Doğada vakit, yeşil çay, sevgi meditasyonu
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Boğaz -->
+            <div class="tab-content" id="boğaz">
+                <div class="chakra-info" style="border-color: #00bfff;">
+                    <h3 style="color: #00bfff;">🔵 Boğaz Çakrası (Vishuddha)</h3>
+                    <p><strong>İşlev:</strong> İletişim, ifade, doğruluk</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Boğaz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Mavi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Eter
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            HAM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            741 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Net iletişim, doğruluk, kendini ifade
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            İfade zorluğu, boğaz sorunları, yalan
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Şarkı söyleme, journaling, mavi taşlar
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Üçüncü Göz -->
+            <div class="tab-content" id="üçüncü">
+                <div class="chakra-info" style="border-color: #8b00ff;">
+                    <h3 style="color: #8b00ff;">🟣 Üçüncü Göz Çakrası (Ajna)</h3>
+                    <p><strong>İşlev:</strong> Sezgi, görü, iç bilgi</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Kaşlar arası
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Mor/İndigo
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Işık
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            OM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            852 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Güçlü sezgi, netlik, vizyonlar
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Kafa karışıklığı, baş ağrısı, illüzyon
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Meditasyon, mor kristaller, karanlıkta sessizlik
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Taç -->
+            <div class="tab-content" id="taç">
+                <div class="chakra-info" style="border-color: #e6e6fa;">
+                    <h3 style="color: #e6e6fa;">⚪ Taç Çakrası (Sahasrara)</h3>
+                    <p><strong>İşlev:</strong> Evrensel bağlantı, aydınlanma</p>
+
+                    <div class="chakra-details">
+                        <div class="detail-item">
+                            <strong>Konum</strong>
+                            Baş tepesi
+                        </div>
+                        <div class="detail-item">
+                            <strong>Renk</strong>
+                            Mor/Beyaz/Altın
+                        </div>
+                        <div class="detail-item">
+                            <strong>Element</strong>
+                            Bilinç
+                        </div>
+                        <div class="detail-item">
+                            <strong>Mantra</strong>
+                            Sessizlik/OM
+                        </div>
+                        <div class="detail-item">
+                            <strong>Frekans</strong>
+                            963 Hz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeli</strong>
+                            Spiritüel farkındalık, kozmik bağlantı
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengesiz</strong>
+                            Kopukluk, anlamsızlık hissi, ruhsal kriz
+                        </div>
+                        <div class="detail-item">
+                            <strong>Dengeleme</strong>
+                            Sessizlik, beyaz ışık meditasyonu, farkındalık
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Aurik Alanlar -->
+        <section id="bolum3">
+            <h2><span class="section-icon">🌟</span> Bölüm 3: Aurik Alanlar (7 Katman)</h2>
+
+            <div class="card-grid">
+                <!-- Layer 1 -->
+                <div class="layer-card">
+                    <div class="layer-number">1</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #6c757d, #9aa5b1);"></div>
+                    <h3>Eterik Beden</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 0-5 cm</p>
+                        <p><strong>Renk:</strong> Mavimsi-gri</p>
+                        <p><strong>İşlev:</strong> Fiziksel sağlığın enerji şablonu. En yoğun katman.</p>
+                        <p><strong>Belirtiler:</strong> Hastalık önce burada görünür, sonra bedene yansır.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 2 -->
+                <div class="layer-card">
+                    <div class="layer-number">2</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #ffe66d);">
+                    </div>
+                    <h3>Duygusal Beden</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 5-10 cm</p>
+                        <p><strong>Renk:</strong> Değişken (duyguya göre)</p>
+                        <p><strong>İşlev:</strong> Duyguları taşır ve yayar.</p>
+                        <p><strong>Belirtiler:</strong> Mutluyken parlak renkler, üzgünken koyu/bulanık.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 3 -->
+                <div class="layer-card">
+                    <div class="layer-number">3</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #ffd700, #ffed4e);"></div>
+                    <h3>Mental Beden</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 10-20 cm</p>
+                        <p><strong>Renk:</strong> Sarı</p>
+                        <p><strong>İşlev:</strong> Düşünceler, inançlar, zihinsel yapılar.</p>
+                        <p><strong>Belirtiler:</strong> Konsantrasyonda baş etrafında genişler.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 4 -->
+                <div class="layer-card">
+                    <div class="layer-number">4</div>
+                    <div class="color-circle"
+                        style="background: linear-gradient(135deg, #ff0000, #ff8c00, #ffd700, #00ff00, #00bfff, #8b00ff);">
+                    </div>
+                    <h3>Astral Beden</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 20-30 cm</p>
+                        <p><strong>Renk:</strong> Gökkuşağı</p>
+                        <p><strong>İşlev:</strong> İlişkiler, rüyalar, astral seyahat.</p>
+                        <p><strong>Belirtiler:</strong> Sevgi ile parlak pembe/yeşil glow.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 5 -->
+                <div class="layer-card">
+                    <div class="layer-number">5</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);"></div>
+                    <h3>Eterik Şablon</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 30-50 cm</p>
+                        <p><strong>Renk:</strong> Koyu mavi</p>
+                        <p><strong>İşlev:</strong> Yaşam planı "blueprint" katmanı.</p>
+                        <p><strong>Belirtiler:</strong> Ruhsal misyonun şifreli hali.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 6 -->
+                <div class="layer-card">
+                    <div class="layer-number">6</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #fce7f3, #e0e7ff, #dbeafe);">
+                    </div>
+                    <h3>Göksel Beden</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 50-70 cm</p>
+                        <p><strong>Renk:</strong> Sedef/Opal</p>
+                        <p><strong>İşlev:</strong> Spiritüel aşk, divine bağlantı.</p>
+                        <p><strong>Belirtiler:</strong> Meditasyonda ışık deneyimi.</p>
+                    </div>
+                </div>
+
+                <!-- Layer 7 -->
+                <div class="layer-card">
+                    <div class="layer-number">7</div>
+                    <div class="color-circle" style="background: linear-gradient(135deg, #ffd700, #fbbf24);"></div>
+                    <h3>Keteric Şablon</h3>
+                    <div class="layer-info">
+                        <p><strong>Mesafe:</strong> 70-100 cm</p>
+                        <p><strong>Renk:</strong> Altın</p>
+                        <p><strong>İşlev:</strong> Kozmik kimlik, tüm katmanları kapsar.</p>
+                        <p><strong>Belirtiler:</strong> Aydınlanma anlarında görülebilir.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 12 Şifa Adımı -->
+        <section id="bolum4">
+            <h2><span class="section-icon">🔮</span> Bölüm 4: 12 Şifa Adımı</h2>
+
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <h3>Nefes Gevşeme</h3>
+                        <p>Derin nefesler, beden gevşer. Kasılmalar bırakılır.</p>
+                        <span class="duration-badge">⏱️ 3 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <h3>Topraklama</h3>
+                        <p>Kökler toprağa iner. Zemin ile bağlantı kurulur.</p>
+                        <span class="duration-badge">⏱️ 2 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <h3>Koruma Kalkanı</h3>
+                        <p>Altın küre oluşur. Negatif enerjilere karşı koruma.</p>
+                        <span class="duration-badge">⏱️ 2 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <h3>Yüksek Benlik Bağlantısı</h3>
+                        <p>Rehberinle bağlan. Yüksek frekansa erişim.</p>
+                        <span class="duration-badge">⏱️ 2 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-content">
+                        <h3>Aurik Tarama</h3>
+                        <p>7 katmanı tara. Aura problemlerini tespit et.</p>
+                        <span class="duration-badge">⏱️ 3 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">6</div>
+                    <div class="timeline-content">
+                        <h3>Çakra Tarama</h3>
+                        <p>7 çakrayı kontrol et. Blokajları hisset.</p>
+                        <span class="duration-badge">⏱️ 5 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">7</div>
+                    <div class="timeline-content">
+                        <h3>Blokaj Tespiti</h3>
+                        <p>Sorunlu yerleri bul. Ağırlık, uyuşukluk, ağrı.</p>
+                        <span class="duration-badge">⏱️ 3 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">8</div>
+                    <div class="timeline-content">
+                        <h3>Mor Alev Temizlik</h3>
+                        <p>Blokajları temizle. Mor ışıkla yakıp dönüştür.</p>
+                        <span class="duration-badge">⏱️ 5 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">9</div>
+                    <div class="timeline-content">
+                        <h3>Altın Işık Doldurma</h3>
+                        <p>Yeniden doldur. Boş kalan yerlere altın ışık.</p>
+                        <span class="duration-badge">⏱️ 3 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 10 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">10</div>
+                    <div class="timeline-content">
+                        <h3>DNA Aktivasyonu</h3>
+                        <p>Sarmalları uyandır. Genetik kodları aktive et.</p>
+                        <span class="duration-badge">⏱️ 3 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 11 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">11</div>
+                    <div class="timeline-content">
+                        <h3>Entegrasyon</h3>
+                        <p>Değişimi kabul et. Yeni frekansı bedene yerleştir.</p>
+                        <span class="duration-badge">⏱️ 2 dakika</span>
+                    </div>
+                </div>
+
+                <!-- Step 12 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">12</div>
+                    <div class="timeline-content">
+                        <h3>Kapanış</h3>
+                        <p>Yavaşça geri dön. Parmaklarını, ayaklarını oynat.</p>
+                        <span class="duration-badge">⏱️ 2 dakika</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="total-time">
+                ✨ Toplam Süre: ~35 dakika ✨
+            </div>
+        </section>
+
+        <!-- Section 5: Bilinç Seviyeleri -->
+        <section id="bolum5">
+            <h2><span class="section-icon">📊</span> Bölüm 5: Bilinç Seviyeleri</h2>
+
+            <div class="pyramid-container">
+                <!-- High Levels (200+) -->
+                <div class="pyramid-level"
+                    style="background: linear-gradient(135deg, #ffd700, #ffffff); color: #0a0a1a; width: 95%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">1000</span>
+                        <span class="level-name">Aydınlanma</span>
+                        <span class="level-icon">✨</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level"
+                    style="background: linear-gradient(135deg, #e6d5ff, #d8b4fe); color: #1a1a1a; width: 92%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">700</span>
+                        <span class="level-name">Huzur</span>
+                        <span class="level-icon">🕊️</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #a5d8ff, #74c0fc); width: 89%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">600</span>
+                        <span class="level-name">Barış</span>
+                        <span class="level-icon">☮️</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #99e9f2, #66d9e8); width: 86%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">540</span>
+                        <span class="level-name">Neşe</span>
+                        <span class="level-icon">😊</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #ffc9c9, #ff8787); width: 83%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">500</span>
+                        <span class="level-name">Sevgi</span>
+                        <span class="level-icon">❤️</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #ffec99, #ffd43b); width: 80%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">400</span>
+                        <span class="level-name">Akıl</span>
+                        <span class="level-icon">🧠</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #b2f2bb, #8ce99a); width: 77%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">350</span>
+                        <span class="level-name">Kabul</span>
+                        <span class="level-icon">🤝</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #8ce99a, #51cf66); width: 74%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">310</span>
+                        <span class="level-name">İsteklilik</span>
+                        <span class="level-icon">💪</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #96f2d7, #63e6be); width: 71%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">250</span>
+                        <span class="level-name">Tarafsızlık</span>
+                        <span class="level-icon">⚖️</span>
+                    </div>
+                </div>
+
+                <!-- CRITICAL THRESHOLD -->
+                <div class="pyramid-level critical-threshold"
+                    style="background: linear-gradient(135deg, #51cf66, #37b24d); width: 68%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">200</span>
+                        <span class="level-name">CESARET ⚡ KRİTİK EŞİK</span>
+                        <span class="level-icon">⚡</span>
+                    </div>
+                </div>
+
+                <!-- Threshold Divider -->
+                <div class="threshold-divider">
+                    ↑ ENERJİ ÜRETİR (200+) | ↓ ENERJİ TÜKETİR (200-)
+                </div>
+
+                <!-- Low Levels (200-) -->
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #ffa94d, #ff922b); width: 65%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">175</span>
+                        <span class="level-name">Gurur</span>
+                        <span class="level-icon">😤</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #ff8787, #ff6b6b); width: 62%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">150</span>
+                        <span class="level-name">Öfke</span>
+                        <span class="level-icon">😠</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #ff922b, #fd7e14); width: 59%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">125</span>
+                        <span class="level-name">Arzu</span>
+                        <span class="level-icon">🔥</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #e03131, #c92a2a); width: 56%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">100</span>
+                        <span class="level-name">Korku</span>
+                        <span class="level-icon">😨</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #adb5bd, #868e96); width: 53%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">75</span>
+                        <span class="level-name">Keder</span>
+                        <span class="level-icon">😢</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #868e96, #6c757d); width: 50%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">50</span>
+                        <span class="level-name">İlgisizlik</span>
+                        <span class="level-icon">😐</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #6c757d, #495057); width: 47%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">30</span>
+                        <span class="level-name">Suçluluk</span>
+                        <span class="level-icon">😔</span>
+                    </div>
+                </div>
+
+                <div class="pyramid-level" style="background: linear-gradient(135deg, #343a40, #212529); width: 44%;">
+                    <div class="pyramid-level-content">
+                        <span class="level-number">20</span>
+                        <span class="level-name">Utanç</span>
+                        <span class="level-icon">😞</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Psişik Yetenekler -->
+        <section id="bolum6">
+            <h2><span class="section-icon">✨</span> Bölüm 6: Psişik Yetenekler</h2>
+
+            <div class="ability-grid">
+                <!-- Ability 1 -->
+                <div class="ability-card">
+                    <div class="ability-icon">👁️</div>
+                    <h3>Durugörü</h3>
+                    <p>Görmediğini görme yeteneği. Fiziksel gözle görülmeyen enerji alanlarını, varlıkları ve gelecek
+                        olayları görme.</p>
+                    <span class="chakra-badge">Üçüncü Göz</span>
+                </div>
+
+                <!-- Ability 2 -->
+                <div class="ability-card">
+                    <div class="ability-icon">👂</div>
+                    <h3>Duruduyum</h3>
+                    <p>Duymadığını duyma yeteneği. Rehber varlıkların, yüksek benliğin veya evrensel bilincin sesini
+                        duyma.</p>
+                    <span class="chakra-badge">Boğaz + Üçüncü Göz</span>
+                </div>
+
+                <!-- Ability 3 -->
+                <div class="ability-card">
+                    <div class="ability-icon">🤲</div>
+                    <h3>Duruhis</h3>
+                    <p>Hissetmediğini hissetme yeteneği. Enerji alanlarını, duyguları ve titreşimleri hissetme.</p>
+                    <span class="chakra-badge">Kalp + Solar Plexus</span>
+                </div>
+
+                <!-- Ability 4 -->
+                <div class="ability-card">
+                    <div class="ability-icon">💭</div>
+                    <h3>Durubiliş</h3>
+                    <p>Bilmediğini bilme yeteneği. Ani kavrayışlar, iç bilgi, nereden geldiği belli olmayan kesin bilgi.
+                    </p>
+                    <span class="chakra-badge">Taç</span>
+                </div>
+
+                <!-- Ability 5 -->
+                <div class="ability-card">
+                    <div class="ability-icon">🧠</div>
+                    <h3>Telepati</h3>
+                    <p>Düşünce aktarımı yeteneği. Zihinsel iletişim, başkalarının düşüncelerini okuma veya gönderme.</p>
+                    <span class="chakra-badge">Üçüncü Göz + Taç</span>
+                </div>
+
+                <!-- Ability 6 -->
+                <div class="ability-card">
+                    <div class="ability-icon">✋</div>
+                    <h3>Psikometri</h3>
+                    <p>Nesnelerden bilgi okuma yeteneği. Bir nesneye dokunarak geçmişini, sahibini veya enerjisini
+                        algılama.</p>
+                    <span class="chakra-badge">Kalp + Eller</span>
+                </div>
+
+                <!-- Ability 7 -->
+                <div class="ability-card">
+                    <div class="ability-icon">🔭</div>
+                    <h3>Uzaktan Görü</h3>
+                    <p>Uzak yerleri görme yeteneği. Fiziksel olarak bulunmadığın yerlerdeki olayları veya nesneleri
+                        görme.</p>
+                    <span class="chakra-badge">Üçüncü Göz</span>
+                </div>
+
+                <!-- Ability 8 -->
+                <div class="ability-card">
+                    <div class="ability-icon">🔮</div>
+                    <h3>Prekognisyon</h3>
+                    <p>Geleceği görme yeteneği. Henüz gerçekleşmemiş olaylar hakkında önceden bilgi alma.</p>
+                    <span class="chakra-badge">Üçüncü Göz + Taç</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Çalışma Yöntemi -->
+        <section id="bolum7">
+            <h2><span class="section-icon">📖</span> Bölüm 7: Çalışma Yöntemi</h2>
+
+            <div class="week-grid">
+                <!-- Week 1-2 -->
+                <div class="week-card">
+                    <div class="week-icon">🧹</div>
+                    <h3>Hafta 1-2: Temel Temizlik</h3>
+                    <span class="week-duration">⏱️ 15-20 dk/gün</span>
+                    <ul>
+                        <li>Çakra temizliği ve dengeleme</li>
+                        <li>Aurik alan taraması</li>
+                        <li>Topraklama egzersizleri</li>
+                        <li>Koruma kalkanı oluşturma</li>
+                    </ul>
+                </div>
+
+                <!-- Week 3-4 -->
+                <div class="week-card">
+                    <div class="week-icon">🌊</div>
+                    <h3>Hafta 3-4: Derinleşme</h3>
+                    <span class="week-duration">⏱️ 20-30 dk/gün</span>
+                    <ul>
+                        <li>Travma salımı çalışmaları</li>
+                        <li>Karmik yük temizliği</li>
+                        <li>Mor alev dönüşümü</li>
+                        <li>Duygusal blokaj açma</li>
+                    </ul>
+                </div>
+
+                <!-- Week 5-6 -->
+                <div class="week-card">
+                    <div class="week-icon">⚡</div>
+                    <h3>Hafta 5-6: Aktivasyon</h3>
+                    <span class="week-duration">⏱️ 30 dk/gün</span>
+                    <ul>
+                        <li>DNA aktivasyonu (12 sarmal)</li>
+                        <li>Pineal bez uyandırma</li>
+                        <li>Kundalini yükselişi</li>
+                        <li>Merkaba aktivasyonu</li>
+                    </ul>
+                </div>
+
+                <!-- Week 7-8 -->
+                <div class="week-card">
+                    <div class="week-icon">🌟</div>
+                    <h3>Hafta 7-8: Entegrasyon</h3>
+                    <span class="week-duration">⏱️ 30-45 dk/gün</span>
+                    <ul>
+                        <li>Tüm aktivasyonları birleştirme</li>
+                        <li>Kristal kafes oluşturma</li>
+                        <li>Işık sütunu bağlantısı</li>
+                        <li>Kozmik DNA tamamlama</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intention Box -->
+        <div class="intention-box">
+            <div class="intention-quote">"</div>
+            <div class="intention-text">
+                En yüce iyiliğim için, tüm boyutlarda,<br>
+                tüm zaman çizgilerinde, temizlik, iyileşme<br>
+                ve aktivasyonun gerçekleşmesini niyet ediyorum.<br><br>
+                <strong style="color: #ffd700;">Öyle olsun.</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="lesson-footer">
+        <div class="footer-progress">
+            ✅ Ders 1 Tamamlandı
+        </div>
+        <div class="footer-buttons">
+            <a href="../sessions/session-1.html" class="footer-btn btn-primary">
+                🎧 Session'ları Dene
+            </a>
+            <span class="footer-btn btn-disabled">
+                📚 Ders 2'ye Geç (Yakında)
+            </span>
+        </div>
+    </div>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+
+                    // GSAP animation for smooth opening
+                    gsap.from(item.querySelector('.accordion-body'), {
+                        opacity: 0,
+                        y: -10,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+
+        // GSAP Hero animation
+        gsap.from('.hero h1', { opacity: 0, y: -30, duration: 1, delay: 0.2 });
+        gsap.from('.hero p', { opacity: 0, y: 20, duration: 1, delay: 0.4 });
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.dataset.tab;
+
+                // Remove active from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Add active to clicked tab and its content
+                tab.classList.add('active');
+                document.getElementById(targetId).classList.add('active');
+
+                // GSAP animation for tab content
+                gsap.from(`#${targetId} .chakra-info`, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
