@@ -268,7 +268,39 @@
     <!-- Audio Element -->
     <audio id="bg-music" loop></audio>
 
+    <!-- Loading Spinner -->
+    <div id="loading-spinner"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="color: #FFD700; font-size: 1.5rem; text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">⏳</div>
+            Yükleniyor...
+        </div>
+    </div>
+
     <script>
+        // ==================== LOADING & ERROR HANDLING ====================
+        window.addEventListener('load', () => {
+            const spinner = document.getElementById('loading-spinner');
+            if (spinner) spinner.style.display = 'none';
+        });
+
+        // Video error handling
+        const bgVideo = document.getElementById('bg-video');
+        if (bgVideo) {
+            bgVideo.addEventListener('error', () => {
+                console.warn('Video yüklenemedi');
+                bgVideo.style.display = 'none';
+            });
+        }
+
+        // GSAP/Confetti error check
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP yüklenemedi');
+        }
+        if (typeof confetti === 'undefined') {
+            console.error('Confetti yüklenemedi');
+        }
+
         // ==================== CUSTOM CURSOR REMOVED ====================
 
         // ==================== MUSIC ====================
