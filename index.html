@@ -277,7 +277,38 @@
         </div>
     </div>
 
+    <!-- Loading Spinner -->
+    <div id="loading-spinner"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="color: #FFD700; font-size: 1.5rem; text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 20px;">⏳</div>
+            Yükleniyor...
+        </div>
+    </div>
+
     <script>
+        // ==================== LOADING & ERROR HANDLING ====================
+        window.addEventListener('load', () => {
+            const spinner = document.getElementById('loading-spinner');
+            if (spinner) spinner.style.display = 'none';
+        });
+
+        // Video error handling
+        const video = document.getElementById('bg-video');
+        if (video) {
+            video.addEventListener('error', () => {
+                console.warn('Video yüklenemedi, gradient arka plan kullanılıyor');
+                video.style.display = 'none';
+            });
+        }
+
+        // CDN error check
+        if (typeof THREE === 'undefined') {
+            console.error('Three.js yüklenemedi!');
+        }
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP yüklenemedi!');
+        }
         // ==================== CUSTOM CURSOR REMOVED ====================
 
         // ==================== 3D SPACE BACKGROUND ====================
