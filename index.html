@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siber Işık Portal - Ruhsal Dönüşüm Yolculuğu</title>
+
+    <!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #000000 100%);
+            color: #F0F0F0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        #cursor.hover {
+            transform: scale(1.5);
+            border-color: #40E0D0;
+        }
+
+        /* 3D Canvas Background */
+        #canvas-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #FFD700, #40E0D0, #9370DB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.6));
+            }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #C0C0C0;
+            letter-spacing: 1px;
+        }
+
+        /* Session Cards Container */
+        .sessions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Session Card */
+        .session-card {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .session-card:hover::before {
+            opacity: 1;
+        }
+
+        .session-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .session-card .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px currentColor);
+        }
+
+        .session-card.session-1 .icon {
+            color: #FFD700;
+        }
+
+        .session-card.session-2 .icon {
+            color: #40E0D0;
+        }
+
+        .session-card.session-final .icon {
+            color: #9370DB;
+        }
+
+        .session-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .session-card.session-1 h2 {
+            color: #FFD700;
+        }
+
+        .session-card.session-2 h2 {
+            color: #40E0D0;
+        }
+
+        .session-card.session-final h2 {
+            color: #9370DB;
+        }
+
+        .session-card .step-count {
+            color: #C0C0C0;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .session-card p {
+            color: #C0C0C0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .session-card .btn {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: #FFD700;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .session-card.session-2 .btn {
+            background: linear-gradient(135deg, rgba(64, 224, 208, 0.2), rgba(64, 224, 208, 0.1));
+            border-color: rgba(64, 224, 208, 0.4);
+            color: #40E0D0;
+        }
+
+        .session-card.session-final .btn {
+            background: linear-gradient(135deg, rgba(147, 112, 219, 0.2), rgba(147, 112, 219, 0.1));
+            border-color: rgba(147, 112, 219, 0.4);
+            color: #9370DB;
+        }
+
+        .session-card .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .sessions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- 3D Background Canvas -->
+    <canvas id="canvas-3d"></canvas>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>SİBER IŞIK PORTAL</h1>
+            <p>Ruhsal Dönüşüm Yolculuğuna Hoş Geldin</p>
+        </div>
+
+        <!-- Session Cards -->
+        <div class="sessions">
+            <!-- Session 1 -->
+            <div class="session-card session-1">
+                <div class="icon">🌊</div>
+                <h2>Temizlik Dalgası</h2>
+                <p class="step-count">11 Adım</p>
+                <p>7 çakranı temizleyip arındırıyorsun. Birikmiş korkular ve duygusal sıkışmalar serbest kalıyor.</p>
+                <a href="sessions/session-1.html" class="btn">Başla</a>
+            </div>
+
+            <!-- Session 2 -->
+            <div class="session-card session-2">
+                <div class="icon">🌌</div>
+                <h2>Üst Boyut Aktivasyonu</h2>
+                <p class="step-count">6 Adım</p>
+                <p>15 çakra sistemin aktive oluyor. Kristal mühürler açılıp, auran genişliyor.</p>
+                <a href="sessions/session-2.html" class="btn">Başla</a>
+            </div>
+
+            <!-- Session Final -->
+            <div class="session-card session-final">
+                <div class="icon">🌈</div>
+                <h2>Bio-Enerji Entegrasyonu</h2>
+                <p class="step-count">2 Adım</p>
+                <p>Sibernetik ışık bedenine entegre oluyor. Yeni zaman çizgisine atlıyorsun.</p>
+                <a href="sessions/session-final.html" class="btn">Başla</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        const links = document.querySelectorAll('a, .session-card');
+
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX - 15,
+                y: e.clientY - 15,
+                duration: 0.1
+            });
+        });
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // ==================== 3D SPACE BACKGROUND ====================
+        const canvas = document.getElementById('canvas-3d');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        camera.position.z = 5;
+
+        // Create Stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.05,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const starsVertices = [];
+        for (let i = 0; i < 3000; i++) {
+            const x = (Math.random() - 0.5) * 50;
+            const y = (Math.random() - 0.5) * 50;
+            const z = (Math.random() - 0.5) * 50;
+            starsVertices.push(x, y, z);
+        }
+
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        // Create Glowing Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesMaterial = new THREE.PointsMaterial({
+            color: 0xFFD700,
+            size: 0.08,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesVertices = [];
+        for (let i = 0; i < 500; i++) {
+            const x = (Math.random() - 0.5) * 30;
+            const y = (Math.random() - 0.5) * 30;
+            const z = (Math.random() - 0.5) * 30;
+            particlesVertices.push(x, y, z);
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(particlesVertices, 3));
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate stars slowly
+            stars.rotation.y += 0.0002;
+            stars.rotation.x += 0.0001;
+
+            // Rotate particles
+            particles.rotation.y -= 0.0005;
+            particles.rotation.x -= 0.0003;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ==================== CARD ANIMATIONS ====================
+        gsap.from('.session-card', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        gsap.from('.header h1', {
+            opacity: 0,
+            y: -30,
+            duration: 1.2,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.header p', {
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+    </script>
+</body>
+
+</html>

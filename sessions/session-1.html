@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seans 1: Temizlik Dalgası</title>
+
+    <!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #F0F0F0;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+        }
+
+        /* Video Background */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.4;
+            filter: blur(3px);
+        }
+
+        /* Main Container */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1;
+            padding: 40px;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Info Screen */
+        .info-box {
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .info-box h1 {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .info-box p {
+            font-size: 1.2rem;
+            color: #C0C0C0;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+            border: 1px solid #FFD700;
+            color: #FFD700;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Breath Screen */
+        #breath-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6), transparent);
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
+        }
+
+        #breath-text {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* Spiral Screen */
+        #spiral-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #spiral-text {
+            position: relative;
+            z-index: 2;
+            font-size: 1.3rem;
+            color: #F0F0F0;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Body Scan Screen */
+        #body-container {
+            position: relative;
+            width: 200px;
+            height: 500px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        #body-light {
+            position: absolute;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg,
+                    rgba(255, 215, 0, 0) 0%,
+                    rgba(255, 215, 0, 0.8) 50%,
+                    rgba(255, 215, 0, 0) 100%);
+            top: 0;
+            filter: blur(10px);
+        }
+
+        #body-text {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Chakra Screen */
+        #chakra-body {
+            position: relative;
+            width: 150px;
+            height: 400px;
+            margin-right: 100px;
+        }
+
+        .chakra-point {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse-chakra 2s infinite;
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        @keyframes pulse-chakra {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.3);
+            }
+        }
+
+        .chakra-label {
+            position: absolute;
+            left: 200px;
+            color: #F0F0F0;
+            font-size: 1.1rem;
+            width: 300px;
+        }
+
+        #chakra-text {
+            font-size: 1.4rem;
+            color: #FFD700;
+            text-align: center;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-top: 30px;
+        }
+
+        .progress-text {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            color: rgba(255, 215, 0, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .hint-text {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 215, 0, 0.4);
+            font-size: 0.9rem;
+            animation: fade-pulse 2s infinite;
+        }
+
+        @keyframes fade-pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Mandala Canvas */
+        #mandala-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Background Video -->
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="../assets/videos/golden-cleansing.mov" type="video/quicktime">
+        <source src="../assets/videos/golden-cleansing.mov" type="video/mp4">
+    </video>
+
+    <!-- 1. Info Screen -->
+    <div class="screen active" id="info-screen">
+        <div class="info-box">
+            <h1>🌊 Temizlik Dalgası</h1>
+            <p>Bu sefer 11 adımlık bir yolculuğa çıkıyorsun.</p>
+            <p>7 çakranı temizleyip arındırıyorsun. Birikmiş korkular ve duygusal sıkışmalar serbest kalıyor.</p>
+            <p><strong>Müziğini yükleyip hazır olduğunda başla.</strong></p>
+
+            <input type="file" id="music-file" accept="audio/*" style="display:none">
+            <button class="btn" onclick="document.getElementById('music-file').click()" style="margin: 20px 10px">🎵
+                Müzik Yükle</button>
+            <button class="btn" onclick="startSession()">Başla</button>
+        </div>
+    </div>
+
+    <!-- 2. Breath Screen -->
+    <div class="screen" id="breath-screen">
+        <div id="breath-circle"></div>
+        <div id="breath-text">Nefes alıyorsun...</div>
+    </div>
+
+    <!-- 3. Spiral Hypnosis Screen -->
+    <div class="screen" id="spiral-screen">
+        <canvas id="spiral-canvas"></canvas>
+        <div id="spiral-text">Sarmalın içine dalıyorsun... Derin bir yolculuğa hazırlanıyorsun...</div>
+    </div>
+
+    <!-- 4. Body Scan Screen -->
+    <div class="screen" id="body-screen">
+        <div id="body-container">
+            <div id="body-light"></div>
+        </div>
+        <div id="body-text">Bedenin taranıyor...</div>
+    </div>
+
+    <!-- 5. Transition Screen -->
+    <div class="screen" id="transition-screen">
+        <div class="info-box" style="padding: 30px;">
+            <h1 style="font-size: 2rem;">✨</h1>
+            <p style="font-size: 1.1rem; margin: 0;">Çakra temizliğine geçiyorsun...</p>
+        </div>
+    </div>
+
+    <!-- 6. Chakra Cleansing Screen -->
+    <div class="screen" id="chakra-screen">
+        <canvas id="mandala-canvas"></canvas>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div id="chakra-body"></div>
+            <div id="chakra-text">Kök çakran temizleniyor...</div>
+        </div>
+        <div class="progress-text" id="chakra-progress">1 / 9</div>
+        <div class="hint-text">Tıkla veya Space tuşuna bas</div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop></audio>
+
+    <script>
+        // ==================== GLOBAL STATE ====================
+        let currentScreen = 'info';
+        let chakraStep = 0;
+        const music = document.getElementById('bg-music');
+
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 });
+        });
+
+        // ==================== MUSIC LOADING ====================
+        document.getElementById('music-file').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                music.src = URL.createObjectURL(file);
+                music.load();
+                alert('✅ Müzik yüklendi!');
+            }
+        });
+
+        // ==================== START SESSION ====================
+        function startSession() {
+            if (music.src) music.play();
+            switchScreen('breath-screen');
+            startBreath();
+        }
+
+        // ==================== SCREEN SWITCHER ====================
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            currentScreen = screenId;
+        }
+
+        // ==================== 2. BREATH EXERCISE ====================
+        function startBreath() {
+            const circle = document.getElementById('breath-circle');
+            const text = document.getElementById('breath-text');
+
+            let cycle = 0;
+            const breathCycle = () => {
+                // Inhale
+                text.textContent = 'Nefes alıyorsun...';
+                gsap.to(circle, { scale: 1.5, duration: 4, ease: 'power1.inOut' });
+
+                setTimeout(() => {
+                    // Exhale
+                    text.textContent = 'Nefes veriyorsun...';
+                    gsap.to(circle, { scale: 1, duration: 6, ease: 'power1.inOut' });
+                }, 4000);
+
+                cycle++;
+                if (cycle < 3) {
+                    setTimeout(breathCycle, 10000);
+                } else {
+                    setTimeout(() => {
+                        switchScreen('spiral-screen');
+                        startSpiral();
+                    }, 10000);
+                }
+            };
+
+            breathCycle();
+        }
+
+        // ==================== 3. SPIRAL HYPNOSIS ====================
+        function startSpiral() {
+            const canvas = document.getElementById('spiral-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 600;
+            canvas.height = 600;
+
+            let angle = 0;
+
+            function drawSpiral() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = '#FFD700';
+                ctx.lineWidth = 2;
+
+                for (let layer = 0; layer < 5; layer++) {
+                    ctx.beginPath();
+                    for (let i = 0; i < 1000; i++) {
+                        const a = 0.1 * i + angle + (layer * Math.PI / 2.5);
+                        const r = 2 * i / 10 + (layer * 30);
+                        const x = canvas.width / 2 + r * Math.cos(a);
+                        const y = canvas.height / 2 + r * Math.sin(a);
+
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.globalAlpha = 0.3 - (layer * 0.05);
+                    ctx.stroke();
+                }
+
+                angle += 0.02;
+                requestAnimationFrame(drawSpiral);
+            }
+
+            drawSpiral();
+
+            setTimeout(() => {
+                switchScreen('body-screen');
+                startBodyScan();
+            }, 90000); // 90 seconds
+        }
+
+        // ==================== 4. BODY SCAN ====================
+        function startBodyScan() {
+            const light = document.getElementById('body-light');
+            const text = document.getElementById('body-text');
+            const labels = [
+                'Baş bölgen taranıyor...',
+                'Boyun ve omuzların taranıyor...',
+                'Göğüs ve kalp bölgen taranıyor...',
+                'Karın bölgen taranıyor...',
+                'Kasık bölgen taranıyor...',
+                'Bacakların taranıyor...'
+            ];
+
+            let index = 0;
+            const scanInterval = setInterval(() => {
+                text.textContent = labels[index];
+                gsap.to(light, {
+                    top: (index * 80) + 'px',
+                    duration: 2,
+                    ease: 'power1.inOut'
+                });
+
+                index++;
+                if (index >= labels.length) {
+                    clearInterval(scanInterval);
+                    setTimeout(() => {
+                        switchScreen('transition-screen');
+                        setTimeout(() => {
+                            switchScreen('chakra-screen');
+                            startChakra();
+                        }, 5000);
+                    }, 2000);
+                }
+            }, 10000); // 10 seconds per zone
+        }
+
+        // ==================== 6. CHAKRA CLEANSING ====================
+        const chakraData = [
+            { name: 'Kök Çakra', color: '#C41E3A', top: '89%', text: 'Kök çakran güçleniyor. Hayatta kalma içgüdülerin dengeleniyor.' },
+            { name: 'Sakral Çakra', color: '#FF6F00', top: '76%', text: 'Sakral çakran parlıyor. Yaratıcılığın ve tutkunacağın akıyor.' },
+            { name: 'Solar Pleksus', color: '#FFD700', top: '60%', text: 'Güç merkezin aktive oluyor. Özgüvenin ve iradenin güçleniyor.' },
+            { name: 'Kalp Çakrası', color: '#00C853', top: '44%', text: 'Kalp çakran açılıyor. Sevgi ve şefkat akıyor.' },
+            { name: 'Boğaz Çakrası', color: '#0091EA', top: '28%', text: 'Boğaz çakran arınıyor. Gerçek ifaden özgürleşiyor.' },
+            { name: '3. Göz', color: '#6A1B9A', top: '14%', text: 'Üçüncü gözün uyandırılıyor. İç görün netleşiyor.' },
+            { name: 'Taç Çakra', color: '#9370DB', top: '2%', text: 'Taç çakran açılıyor. İlahi bağlantın güçleniyor.' },
+            { name: 'Duygu Sıkışmaları', color: '#FF4081', top: '50%', text: 'Kalbindeki ağırlıklar eriyip akıp gidiyor...' },
+            { name: 'Omurilik Korkuları', color: '#1A237E', top: '70%', text: 'Omuriliğinde saklı korkular vortekse akıyor, dönüşüme uğruyor...' }
+        ];
+
+        function startChakra() {
+            createChakraPoints();
+            updateChakra();
+            startMandala();
+
+            // Click or Space to advance
+            const advanceChakra = () => nextChakra();
+            document.addEventListener('click', advanceChakra);
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    advanceChakra();
+                }
+            });
+        }
+
+        function createChakraPoints() {
+            const body = document.getElementById('chakra-body');
+            chakraData.forEach((chakra, i) => {
+                if (i < 7) { // Only first 7 chakras displayed
+                    const point = document.createElement('div');
+                    point.className = 'chakra-point';
+                    point.style.backgroundColor = chakra.color;
+                    point.style.top = chakra.top;
+                    point.id = `chakra-${i}`;
+                    body.appendChild(point);
+                }
+            });
+        }
+
+        function updateChakra() {
+            const data = chakraData[chakraStep];
+            document.getElementById('chakra-text').textContent = data.text;
+            document.getElementById('chakra-progress').textContent = `${chakraStep + 1} / ${chakraData.length}`;
+
+            // Highlight current chakra
+            if (chakraStep < 7) {
+                const currentPoint = document.getElementById(`chakra-${chakraStep}`);
+                if (currentPoint) {
+                    gsap.to(currentPoint, {
+                        scale: 2,
+                        duration: 0.5,
+                        yoyo: true,
+                        repeat: -1
+                    });
+                }
+            }
+        }
+
+        function nextChakra() {
+            chakraStep++;
+            if (chakraStep < chakraData.length) {
+                updateChakra();
+            } else {
+                completeSession();
+            }
+        }
+
+        // ==================== MANDALA ANIMATION ====================
+        function startMandala() {
+            const canvas = document.getElementById('mandala-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            let rotation = 0;
+
+            function drawMandala() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(rotation);
+
+                const petals = 12;
+                for (let i = 0; i < petals; i++) {
+                    ctx.save();
+                    ctx.rotate((Math.PI * 2 / petals) * i);
+
+                    ctx.strokeStyle = chakraData[Math.min(chakraStep, 6)].color;
+                    ctx.lineWidth = 2;
+                    ctx.globalAlpha = 0.4;
+
+                    ctx.beginPath();
+                    ctx.arc(80, 0, 30, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    ctx.restore();
+                }
+
+                ctx.restore();
+                rotation += 0.01;
+                requestAnimationFrame(drawMandala);
+            }
+
+            drawMandala();
+        }
+
+        // ==================== COMPLETION ====================
+        function completeSession() {
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#FFD700', '#40E0D0', '#9370DB']
+            });
+
+            setTimeout(() => {
+                alert('✨ Tebrikler! Temizlik Dalgası tamamlandı! ✨');
+                window.location.href = '../index.html';
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

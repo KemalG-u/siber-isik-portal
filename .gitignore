@@ -1,0 +1,14 @@
+# Binaries and OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Large video files (>100MB GitHub limit)
+assets/videos/*.mov
+assets/videos/*.mp4

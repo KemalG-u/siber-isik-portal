@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seans 2: Üst Boyut Aktivasyonu</title>
+
+    <!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #F0F0F0;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #40E0D0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+        }
+
+        /* Video Background */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Container */
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1;
+            padding: 40px;
+        }
+
+        /* Content Box */
+        .content-box {
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(64, 224, 208, 0.4);
+            border-radius: 20px;
+            padding: 60px 50px;
+            max-width: 800px;
+            text-align: center;
+            animation: fade-in 1s ease;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #40E0D0;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(64, 224, 208, 0.5);
+        }
+
+        .step-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #F0F0F0;
+            margin-bottom: 40px;
+        }
+
+        .progress {
+            color: rgba(64, 224, 208, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, rgba(64, 224, 208, 0.3), rgba(64, 224, 208, 0.1));
+            border: 1px solid #40E0D0;
+            color: #40E0D0;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(64, 224, 208, 0.5);
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(64, 224, 208, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Decorative Merkaba Image */
+        .merkaba-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #40E0D0;
+            box-shadow: 0 0 30px rgba(64, 224, 208, 0.6);
+            margin-bottom: 30px;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Background Video -->
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="../assets/videos/5d-realm-bg.mov" type="video/quicktime">
+        <source src="../assets/videos/5d-realm-bg.mov" type="video/mp4">
+    </video>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-box">
+            <img src="../assets/images/merkaba-3d.jpg" alt="Merkaba" class="merkaba-img">
+            <h1 id="title">🌌 Üst Boyut Aktivasyonu</h1>
+            <p class="progress" id="progress">Adım 1 / 6</p>
+            <p class="step-text" id="text">15 çakra sistemin aktive oluyor. Bedenin üstündeki ve altındaki enerji
+                merkezlerini hissediyorsun...</p>
+
+            <div id="controls">
+                <input type="file" id="music-file" accept="audio/*" style="display:none">
+                <button class="btn" onclick="document.getElementById('music-file').click()">🎵 Müzik Yükle</button>
+                <button class="btn" onclick="nextStep()">Devam Et ➡️</button>
+            </div>
+        </div>
+        <div class="hint">Tıkla veya Space tuşuna bas</div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop></audio>
+
+    <script>
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX - 10, y: e.clientY - 10, duration: 0.1 });
+        });
+
+        // ==================== MUSIC ====================
+        const music = document.getElementById('bg-music');
+        document.getElementById('music-file').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                music.src = URL.createObjectURL(file);
+                music.load();
+                music.play();
+                alert('✅ Müzik yüklendi!');
+            }
+        });
+
+        // ==================== SESSION STEPS ====================
+        const steps = [
+            '15 çakra sistemin aktive oluyor. Bedeninin üstündeki ve altındaki enerji merkezlerini hissediyorsun...',
+            'Auran genişliyor, katmanlar halinde büyüyor. 3 metre çapında parlak bir enerji alanısın...',
+            'DNA\'na yerleştirilmiş kristal mühürler açılıyor. İç bilgeliğine erişim sağlanıyor...',
+            'Zihnindeki yabancı sesler, olumsuz programlar temizleniyor. Kendi gerçek sesini duyuyorsun...',
+            'İçinde ebedi yanan altın alev canlanıyor. İlahi ateş seni dönüştürüyor...',
+            'Üst boyutlardan akan ilahi ışık bedenine, hücrelerine nüfuz ediyor. Yükseliş başlıyor...'
+        ];
+
+        let currentStep = 0;
+
+        function nextStep() {
+            currentStep++;
+
+            if (currentStep < steps.length) {
+                document.getElementById('progress').textContent = `Adım ${currentStep + 1} / ${steps.length}`;
+                document.getElementById('text').textContent = steps[currentStep];
+
+                // Re-animate content box
+                gsap.fromTo('.content-box',
+                    { opacity: 0, scale: 0.95 },
+                    { opacity: 1, scale: 1, duration: 0.8 }
+                );
+            } else {
+                completeSession();
+            }
+        }
+
+        function completeSession() {
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#40E0D0', '#FFD700', '#9370DB']
+            });
+
+            setTimeout(() => {
+                alert('✨ Tebrikler! Üst Boyut Aktivasyonu tamamlandı! ✨');
+                window.location.href = '../index.html';
+            }, 3000);
+        }
+
+        // Space key support
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                nextStep();
+            }
+        });
+
+        // Intro animation
+        gsap.from('.merkaba-img', {
+            scale: 0,
+            rotation: 180,
+            duration: 1.5,
+            ease: 'back.out'
+        });
+    </script>
+</body>
+
+</html>
