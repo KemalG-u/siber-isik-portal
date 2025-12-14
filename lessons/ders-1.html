@@ -775,6 +775,12 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+
+            /* CRITICAL: Fixed background causes scroll freeze on mobile */
+            .hero {
+                background-attachment: scroll !important;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
