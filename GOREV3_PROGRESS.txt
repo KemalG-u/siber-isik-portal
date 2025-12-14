@@ -1,0 +1,10 @@
+# GÖREV 3 - FULL IMPLEMENTATION
+
+CSS ve HTML tamam, şimdi ders-2.html'i manuel olarak düzenleyeceğim.
+
+## CSS (yaklaşık ~400 satır) hazır
+## HTML (4 section) hazır
+
+Manuel düzenleme gerekiyor - dosya çok büyük!
+
+GÖREV 3 BİTİRİLİYOR...
