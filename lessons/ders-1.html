@@ -1659,6 +1659,190 @@
             font-size: 0.95rem;
             color: #FFD700;
         }
+
+        /* ===== BOYUTSAL YÜKSELME ANIMATION ===== */
+        .boyutsal-yukselme {
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.05), rgba(138, 43, 226, 0.05));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .yukselme-container {
+            max-width: 800px;
+            margin: 50px auto;
+            position: relative;
+            height: 500px;
+        }
+
+        .boyut-figure {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            transition: all 2s ease;
+            animation: ascend 6s infinite;
+        }
+
+        @keyframes ascend {
+            0% {
+                bottom: 50px;
+                opacity: 0.3;
+            }
+
+            50% {
+                bottom: 400px;
+                opacity: 1;
+            }
+
+            100% {
+                bottom: 50px;
+                opacity: 0.3;
+            }
+        }
+
+        .dimension-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            animation: fade-labels 6s infinite;
+        }
+
+        .dim-3d {
+            bottom: 20px;
+            color: #FF6B6B;
+        }
+
+        .dim-4d {
+            bottom: 220px;
+            color: #FFD700;
+        }
+
+        .dim-5d {
+            bottom: 420px;
+            color: #00FFB3;
+        }
+
+        @keyframes fade-labels {
+
+            0%,
+            33% {
+                opacity: 1;
+            }
+
+            34%,
+            66% {
+                opacity: 0.3;
+            }
+
+            67%,
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(500px);
+                opacity: 0;
+            }
+        }
+
+        .yukselme-aciklama {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 4px solid #9370DB;
+            border-radius: 10px;
+        }
+
+        /* Bak Geç Section */
+        .bak-gec-section {
+            background: linear-gradient(135deg, rgba(147, 112, 219, 0.03), rgba(75, 0, 130, 0.03));
+        }
+
+        .puzzle-visual {
+            text-align: center;
+            font-size: 8rem;
+            margin: 40px 0;
+            animation: puzzle-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes puzzle-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .action-list {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .action-item {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 20px;
+            border-left: 4px solid #FFD700;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .action-item:hover {
+            transform: translateX(10px);
+            border-left-width: 8px;
+        }
+
+        /* Yük Kategorileri Grid */
+        .yuk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .yuk-kategori {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .yuk-kategori:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .yuk-kategori h4 {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kategori-icon {
+            font-size: 2rem;
+        }
     </style>
 </head>
 
@@ -2070,6 +2254,112 @@
                 <strong>Not:</strong> Çok derin ve yorucu çalışmadan bahsetmiyoruz.
                 Daha soft, daha yüzeysel ama gerçekten karşılığı olan maddeler.
             </p>
+        </section>
+
+        <!-- NEW SECTION: Boyutsal Yükselme -->
+        <section class="boyutsal-yukselme" id="boyutsalYukselme">
+            <h2><span class="section-icon">🚀</span> Boyutsal Yükselme</h2>
+
+            <div class="yukselme-container">
+                <div class="boyut-figure">🧘</div>
+                <div class="dimension-label dim-3d">3. Boyut</div>
+                <div class="dimension-label dim-4d">4. Boyut</div>
+                <div class="dimension-label dim-5d">5. Boyut</div>
+            </div>
+
+            <div class="yukselme-aciklama">
+                <h3 style="color: #FFD700; margin-bottom: 15px;">Ne Oluyor?</h3>
+                <p>Yüklerini attıkça HAFIFLEŞIYORSUN. Hafifleştikçe yukarı çıkıyorsun.</p>
+                <p style="margin-top: 15px;"><strong>Mekanizma:</strong> Arındıkça titreşimin artıyor → Daha yüksek
+                    boyutlara erişim açılıyor</p>
+                <p style="margin-top: 15px; color: #FFD700;" 💡 <strong>Anahtar:</strong> Temizlik = Yükselme (Otomatik)
+                </p>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Bak Geç -->
+        <section class="bak-gec-section" id="bakGec">
+            <h2><span class="section-icon">👁️</span> "Bak Geç, Gör Geç" Felsefesi</h2>
+
+            <div class="puzzle-visual">🧩</div>
+
+            <div class="puzzle-aciklama" style="text-align: center; margin: 30px 0;">
+                <blockquote
+                    style="font-size: 1.3rem; font-style: italic; color: #FFD700; padding: 20px; background: rgba(255, 215, 0, 0.05); border-radius: 10px;">
+                    "Bir puzzle'ın tek bir parçasını gördüğünde tüm resmi göremiyor olabilirsin.<br>
+                    Ama bu hiç önemli değil. Çünkü puzzle kendi kendine tamamlanacak."
+                </blockquote>
+            </div>
+
+            <h3 style="text-align: center; color: #9370DB; margin: 40px 0 20px;">Neler Yapman Gerekiyor?</h3>
+
+            <div class="action-list">
+                <div class="action-item">
+                    <h4 style="color: #FFD700; margin-bottom: 10px;">1. Bak Geç, Gör Geç</h4>
+                    <p>İçeriği anlamaya çalışma. Sadece gözünden geçir, okumaya devam et.</p>
+                </div>
+
+                <div class="action-item">
+                    <h4 style="color: #FFD700; margin-bottom: 10px;">2. Aktivasyonları Dinle</h4>
+                    <p>Anlamasan da dinle. Bilincin işleniyor, arka planda.</p>
+                </div>
+
+                <div class="action-item">
+                    <h4 style="color: #FFD700; margin-bottom: 10px;">3. Relax Ol</h4>
+                    <p>Stressiz, rahat, güven içinde. "Anlamak zorundayım" baskısından kurtul.</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(147, 112, 219, 0.1); padding: 25px; border-radius: 10px; margin-top: 40px;">
+                <h4 style="color: #FFD700; margin-bottom: 15px;">⚠️ Kadınlar İçin Özel Not</h4>
+                <p style="line-height: 1.8;">Sakral çakrada başka bir boyut ekleniyor. Bu nedenle kadınlar için
+                    Sakral'daki arınma erkeklere göre daha derin ve uzun sürebilir. Normal.</p>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Yük Kategorileri -->
+        <section id="yukKategorileri">
+            <h2><span class="section-icon">📊</span> Yük Kategorileri</h2>
+
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+                Sistemde temizlenen yüklerin 6 ana kategorisi:
+            </p>
+
+            <div class="yuk-grid">
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">💔</span> Travmalar</h4>
+                    <p>Çocukluk travmaları, şok anlar, fiziksel/duygusal yaralanmalar. Hücresel bellek olarak
+                        depolanmış.</p>
+                </div>
+
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">😢</span> Sıkışmış Duygular</h4>
+                    <p>Bastırılmış kızgınlık, keder, üzüntü. Özellikle Sakral çakrada ağır yük.</p>
+                    <p style="color: #FFD700; margin-top: 10px;">💡 <strong>Sakral'a özellikle dikkat!</strong> En büyük
+                        depo burada.</p>
+                </div>
+
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">⛓️</span> Karmik Yükler</h4>
+                    <p>Geçmiş yaşam kalıpları, ata karmaları, kolektif karmalar. Tekrarlayan kalıpların kaynağı.</p>
+                </div>
+
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">🌍</span> Kolektif Yükler</h4>
+                    <p>Toplumsal travmalar, savaşlar, felaketler. Kolektif bilinçten alınan yükler.</p>
+                </div>
+
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">🧬</span> Genetik/Epigenetik</h4>
+                    <p>Aile soyunda taşınan travmalar, korular, inançlar. DNA düzeyinde kodlanmış.</p>
+                </div>
+
+                <div class="yuk-kategori">
+                    <h4><span class="kategori-icon">⭐</span> "Şerefliler"</h4>
+                    <p>Başkalarının yüklerini taşıma, kurban olmak, fedakarlık. Sevgi kisvesi altında yük.</p>
+                    <p style="color: #FFD700; margin-top: 10px;">💡 En sinsi kategori - "iyi niyetle" taşınıyor.</p>
+                </div>
+            </div>
         </section>
 
         <!-- NEW SECTION: Seans Protokolü -->
