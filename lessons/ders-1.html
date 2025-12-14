@@ -945,6 +945,50 @@
             transform: translateY(-3px);
         }
 
+        .nav-link:hover {
+            color: #ffd700;
+            border-bottom-color: #ffd700;
+        }
+
+        /* Progress Bar */
+        .lesson-progress {
+            position: sticky;
+            top: 70px;
+            background: rgba(10, 10, 26, 0.95);
+            padding: 10px 0;
+            z-index: 998;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .progress-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #FFD700;
+            margin-top: 5px;
+        }
+
         .btn-devam {
             color: #0a0a1a;
             border-color: #FFD700;
@@ -1667,6 +1711,16 @@
             <a href="#bolum7" class="nav-link">📖 Çalışma Yöntemi</a>
         </div>
     </nav>
+
+    <!-- Progress Bar -->
+    <div class="lesson-progress">
+        <div class="progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% Tamamlandı</div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
@@ -3410,6 +3464,19 @@
         // GSAP Hero animation
         gsap.from('.hero h1', { opacity: 0, y: -30, duration: 1, delay: 0.2 });
         gsap.from('.hero p', { opacity: 0, y: 20, duration: 1, delay: 0.4 });
+
+        // Progress Bar Update on Scroll
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            const clampedPercentage = Math.min(Math.max(scrollPercentage, 0), 100);
+
+            document.getElementById('progressFill').style.width = clampedPercentage + '%';
+            document.getElementById('progressText').textContent = Math.round(clampedPercentage) + '% Tamamlandı';
+        });
 
         // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
