@@ -1,0 +1,101 @@
+<!-- 8 KALKAN SİSTEMİ SECTION -->
+<section id="sekiz-kalkan" class="kalkan-section">
+    <div class="container">
+        <h2><span class="section-icon">🛡️</span> 8 Koruma Kalkanı Sistemi</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; color: #9370DB;">
+            Boyutsal Koruma - Telluric'ten Eckatic'e Dikey Yükseliş
+        </p>
+        
+        <div class="kalkan-container">
+            <div class="kalkan-vertical-line"></div>
+            
+            <!-- 1. TELLURIC -->
+            <div class="kalkan-item" data-kalkan="1">
+                <div class="kalkan-disk telluric">🔴</div>
+                <div class="kalkan-info">
+                    <h3>1. TELLURİC</h3>
+                    <p class="boyut">1-2-3. Boyut</p>
+                    <p class="hova">Nada Hova</p>
+                </div>
+            </div>
+            
+            <!-- 2. DORADIC -->
+            <div class="kalkan-item" data-kalkan="2">
+                <div class="kalkan-disk doradic">🟠</div>
+                <div class="kalkan-info">
+                    <h3>2. DORADİC</h3>
+                    <p class="boyut">4-5-6. Boyut</p>
+                    <p class="hova">Alphi Hova</p>
+                </div>
+            </div>
+            
+            <!-- 3. TEURIC -->
+            <div class="kalkan-item" data-kalkan="3">
+                <div class="kalkan-disk teuric">🟢</div>
+                <div class="kalkan-info">
+                    <h3>3. TEURİC</h3>
+                    <p class="boyut">7-8-9. Boyut</p>
+                    <p class="hova">Betcha Hova</p>
+                </div>
+            </div>
+            
+            <!-- 4. MAHARIC - CRITICAL -->
+            <div class="kalkan-item" data-kalkan="4">
+                <div class="kalkan-disk maharic">🟣</div>
+                <div class="kalkan-info">
+                    <h3>4. MAHARİC ⭐</h3>
+                    <p class="boyut">10-11-12. Boyut</p>
+                    <p class="hova">Mahara Hova</p>
+                    <div class="maharic-warning">
+                        <h4>⚠️ KARANLIK TARAFIN SINIRI</h4>
+                        <p>12. boyutun üstüne çıkabilirse karanlık taraf size ulaşamaz!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5. RISHIC -->
+            <div class="kalkan-item" data-kalkan="5">
+                <div class="kalkan-disk rishic">🟡</div>
+                <div class="kalkan-info">
+                    <h3>5. RİSHİC</h3>
+                    <p class="boyut">13-14-15. Boyut</p>
+                    <p class="hova">Raja Hova</p>
+                </div>
+            </div>
+            
+            <!-- 6. TRIADIC -->
+            <div class="kalkan-item" data-kalkan="6">
+                <div class="kalkan-disk triadic">⚪</div>
+                <div class="kalkan-info">
+                    <h3>6. TRİADİC</h3>
+                    <p class="boyut">16. Katman</p>
+                    <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                </div>
+            </div>
+            
+            <!-- 7. POLARIC -->
+            <div class="kalkan-item" data-kalkan="7">
+                <div class="kalkan-disk polaric">💎</div>
+                <div class="kalkan-info">
+                    <h3>7. POLARİC</h3>
+                    <p class="boyut">17. Katman</p>
+                    <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                </div>
+            </div>
+            
+            <!-- 8. ECKATIC -->
+            <div class="kalkan-item" data-kalkan="8">
+                <div class="kalkan-disk eckatic">⚡</div>
+                <div class="kalkan-info">
+                    <h3>8. ECKATİC</h3>
+                    <p class="boyut">18. Katman</p>
+                    <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                </div>
+            </div>
+        </div>
+        
+        <button class="aktivasyon-btn" onclick="aktivasyonYap()">
+            ✨ Kalkanları Aktive Et
+        </button>
+    </div>
+</section>

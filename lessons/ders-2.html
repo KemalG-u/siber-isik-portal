@@ -2034,6 +2034,159 @@
             font-size: 2rem;
         }
 
+        /* ===== 8 KALKAN SYSTEM ===== */
+        .kalkan-section {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(245, 158, 11, 0.05));
+            padding: 60px 20px;
+        }
+
+        .kalkan-container {
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .kalkan-vertical-line {
+            position: absolute;
+            left: 80px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #EF4444, #F97316, #22C55E, #8B5CF6, #F59E0B, #E5E5E5, #F0F0F0, #FFFFFF);
+            border-radius: 2px;
+        }
+
+        .kalkan-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 140px;
+            min-height: 100px;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+
+        .kalkan-item.active {
+            opacity: 1;
+            transform: translateX(10px);
+        }
+
+        .kalkan-disk {
+            position: absolute;
+            left: 40px;
+            top: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.5s ease;
+        }
+
+        .kalkan-item.active .kalkan-disk {
+            box-shadow: 0 0 50px currentColor;
+            transform: scale(1.1);
+        }
+
+        .kalkan-disk.telluric {
+            background: radial-gradient(#EF4444, #7F1D1D);
+        }
+
+        .kalkan-disk.doradic {
+            background: radial-gradient(#F97316, #7C2D12);
+        }
+
+        .kalkan-disk.teuric {
+            background: radial-gradient(#22C55E, #14532D);
+        }
+
+        .kalkan-disk.maharic {
+            background: radial-gradient(#8B5CF6, #4C1D95);
+            border: 3px solid #FFD700;
+            animation: maharic-pulse 2s infinite;
+        }
+
+        .kalkan-disk.rishic {
+            background: radial-gradient(#F59E0B, #78350F);
+        }
+
+        .kalkan-disk.triadic {
+            background: radial-gradient(#E5E5E5, #737373);
+        }
+
+        .kalkan-disk.polaric {
+            background: radial-gradient(#F0F0F0, #A3A3A3);
+        }
+
+        .kalkan-disk.eckatic {
+            background: radial-gradient(#FFFFFF, #D4D4D4);
+        }
+
+        @keyframes maharic-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px #FFD700;
+            }
+
+            50% {
+                box-shadow: 0 0 60px #FFD700;
+            }
+        }
+
+        .kalkan-info h3 {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .kalkan-info .boyut {
+            color: #9370DB;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .kalkan-info .hova {
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        .maharic-warning {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .maharic-warning h4 {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .aktivasyon-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #7C3AED, #F59E0B);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .aktivasyon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.5);
+        }
+
         /* ===== UYUMLAMA CHECKLIST ===== */
         .uyumlama-checklist {
             background: linear-gradient(135deg, rgba(75, 0, 130, 0.03), rgba(255, 215, 0, 0.03));
@@ -2390,6 +2543,100 @@
             <div class="progress-text" id="progressText">0% Tamamlandı</div>
         </div>
     </div>
+
+    <!-- 8 KALKAN SİSTEMİ -->
+    <section id="sekiz-kalkan" class="kalkan-section">
+        <div class="container">
+            <h2><span class="section-icon">🛡️</span> 8 Koruma Kalkanı Sistemi</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; color: #9370DB;">
+                Boyutsal Koruma - Telluric'ten Eckatic'e Dikey Yükseliş
+            </p>
+
+            <div class="kalkan-container">
+                <div class="kalkan-vertical-line"></div>
+
+                <div class="kalkan-item" data-kalkan="1">
+                    <div class="kalkan-disk telluric">🔴</div>
+                    <div class="kalkan-info">
+                        <h3>1. TELLURİC</h3>
+                        <p class="boyut">1-2-3. Boyut</p>
+                        <p class="hova">Nada Hova</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="2">
+                    <div class="kalkan-disk doradic">🟠</div>
+                    <div class="kalkan-info">
+                        <h3>2. DORADİC</h3>
+                        <p class="boyut">4-5-6. Boyut</p>
+                        <p class="hova">Alphi Hova</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="3">
+                    <div class="kalkan-disk teuric">🟢</div>
+                    <div class="kalkan-info">
+                        <h3>3. TEURİC</h3>
+                        <p class="boyut">7-8-9. Boyut</p>
+                        <p class="hova">Betcha Hova</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="4">
+                    <div class="kalkan-disk maharic">🟣</div>
+                    <div class="kalkan-info">
+                        <h3>4. MAHARİC ⭐</h3>
+                        <p class="boyut">10-11-12. Boyut</p>
+                        <p class="hova">Mahara Hova</p>
+                        <div class="maharic-warning">
+                            <h4>⚠️ KARANLIK TARAFIN SINIRI</h4>
+                            <p>12. boyutun üstüne çıkabilirse karanlık taraf size ulaşamaz!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="5">
+                    <div class="kalkan-disk rishic">🟡</div>
+                    <div class="kalkan-info">
+                        <h3>5. RİSHİC</h3>
+                        <p class="boyut">13-14-15. Boyut</p>
+                        <p class="hova">Raja Hova</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="6">
+                    <div class="kalkan-disk triadic">⚪</div>
+                    <div class="kalkan-info">
+                        <h3>6. TRİADİC</h3>
+                        <p class="boyut">16. Katman</p>
+                        <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="7">
+                    <div class="kalkan-disk polaric">💎</div>
+                    <div class="kalkan-info">
+                        <h3>7. POLARİC</h3>
+                        <p class="boyut">17. Katman</p>
+                        <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                    </div>
+                </div>
+
+                <div class="kalkan-item" data-kalkan="8">
+                    <div class="kalkan-disk eckatic">⚡</div>
+                    <div class="kalkan-info">
+                        <h3>8. ECKATİC</h3>
+                        <p class="boyut">18. Katman</p>
+                        <p class="hova" style="font-size: 0.85rem; color: #999;">ELEYANİC KALKAN (6-7-8)</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="aktivasyon-btn" onclick="aktivasyonYap()">
+                ✨ Kalkanları Aktive Et
+            </button>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <div class="container">
