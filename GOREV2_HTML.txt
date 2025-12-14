@@ -1,0 +1,220 @@
+# GÖREV 2 HTML - 3 SECTIONS
+
+Bu kodları ders-2.html'e ekle - 8 Kalkan section'ından sonra!
+
+---
+
+## 1. YASİN KAPISI
+
+```html
+<!-- YASİN KAPISI -->
+<section id="yasin-kapisi">
+    <div class="container">
+        <h2><span class="section-icon">🌀</span> Yasin Kapısı</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+            3. Boyuttan 5. Boyuta Geçiş Portalı
+        </p>
+        
+        <div class="yasin-portal">
+            <div class="portal-ring ring-1"></div>
+            <div class="portal-ring ring-2"></div>
+            <div class="portal-ring ring-3"></div>
+            <div class="silver-orb"></div>
+            <div class="dimension-label-portal dim-3-label">3. BOYUT</div>
+            <div class="dimension-label-portal dim-5-label">5. BOYUT</div>
+        </div>
+        
+        <div class="yasin-info-grid">
+            <div class="yasin-card">
+                <h4 style="color: #FFD700;">📍 Konum</h4>
+                <p>Kalp çakrasının arka tarafı, omurganın ortası, sırtın ortası</p>
+            </div>
+            <div class="yasin-card">
+                <h4 style="color: #FFD700;">💎 Anne Ruh Parçası</h4>
+                <p>Omuriliğin ortasında gümüş top şeklinde. AŞAĞIdan yukarıya çıkıyor.</p>
+            </div>
+            <div class="yasin-card">
+                <h4 style="color: #FFD700;">🔓 Açılış</h4>
+                <p>Anne ruh parçası yukarı çıkarken, Yasin Kapısı açılıyor. Portal devreye giriyor.</p>
+            </div>
+            <div class="yasin-card">
+                <h4 style="color: #FFD700;">🔒Mühür</h4>
+                <p>Gümüş anne parçası kapının kilidini açıyor. Arınma sonrası açılır.</p>
+            </div>
+        </div>
+        
+        <div class="yasin-warning">
+            <h4 style="color: #FF6B6B; margin-bottom: 10px;">⚠️ HASSİYET UYARISI</h4>
+            <p>Bu hassas bir işlem! Başlattığında bitir. Yarım bırakmayın!</p>
+        </div>
+        
+        <h3 style="text-align: center; color: #FFD700; margin: 40px 0 20px;">4 Adımda Geçiş</h3>
+        <div class="yasin-steps">
+            <div class="yasin-step">
+                <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
+                <h4 style="color: #7C3AED;">Hazırlık</h4>
+                <p style="font-size: 0.85rem;">Arınma tamamlandı, portal açılıyor</p>
+            </div>
+            <div class="yasin-step">
+                <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
+                <h4 style="color: #7C3AED;">Kapı Açılışı</h4>
+                <p style="font-size: 0.85rem;">Gümüş orb yukarı çıkıyor</p>
+            </div>
+            <div class="yasin-step">
+                <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
+                <h4 style="color: #7C3AED;">Geçiş</h4>
+                <p style="font-size: 0.85rem;">3→5 boyut transferi başlıyor</p>
+            </div>
+            <div class="yasin-step">
+                <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
+                <h4 style="color: #7C3AED;">Tamamlanma</h4>
+                <p style="font-size: 0.85rem;">5. boyutta tutunuş sağlandı</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+## 2. SPİRAL BEYAZ ALEV
+
+```html
+<!-- SPİRAL BEYAZ ALEV -->
+<section id="spiral-alev">
+    <div class="container">
+        <h2><span class="section-icon">🔥</span> Spiral Beyaz Alev</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+            Derin Temizlik - Tersi Yönde Sarmalama
+        </p>
+        
+        <div class="spiral-container">
+            <div class="human-silhouette"></div>
+            <div class="white-flame-spiral">
+                <div class="flame-ring f1"></div>
+                <div class="flame-ring f2"></div>
+                <div class="flame-ring f3"></div>
+                <div class="flame-ring f4"></div>
+                <div class="flame-ring f5"></div>
+            </div>
+            <div class="spiral-direction">↺ Saat Yönünün TERSİNDE</div>
+        </div>
+        
+        <h3 style="text-align: center; color: #FFD700; margin: 40px 0 20px;">Temizlenenler</h3>
+        <div class="temizlenen-list">
+            <div class="temizlenen-item">
+                <span style="color: #00C851; font-size: 1.5rem;">✓</span> Tüm psişikler
+            </div>
+            <div class="temizlenen-item">
+                <span style="color: #00C851; font-size: 1.5rem;">✓</span> Tüm negatifler ve nazarlar
+            </div>
+            <div class="temizlenen-item">
+                <span style="color: #00C851; font-size: 1.5rem;">✓</span> Tüm blokajlar
+            </div>
+            <div class="temizlenen-item">
+                <span style="color: #00C851; font-size: 1.5rem;">✓</span> Tüm implantlar
+            </div>
+        </div>
+        
+        <h3 style="text-align: center; color: #FFD700; margin: 40px 0 20px;">Kullanım Adımları</h3>
+        <div class="kullanim-grid">
+            <div class="kullanim-card">
+                <div style="font-size: 1.5rem; margin-bottom: 10px;">1️⃣</div>
+                <p style="font-size: 0.85rem;">Niyet et</p>
+            </div>
+            <div class="kullanim-card">
+                <div style="font-size: 1.5rem; margin-bottom: 10px;">2️⃣</div>
+                <p style="font-size: 0.85rem;">Spiral başlat</p>
+            </div>
+            <div class="kullanim-card">
+                <div style="font-size: 1.5rem; margin-bottom: 10px;">3️⃣</div>
+                <p style="font-size: 0.85rem;">Sarmalama</p>
+            </div>
+            <div class="kullanim-card">
+                <div style="font-size: 1.5rem; margin-bottom: 10px;">4️⃣</div>
+                <p style="font-size: 0.85rem;">Temizlik</p>
+            </div>
+            <div class="kullanim-card">
+                <div style="font-size: 1.5rem; margin-bottom: 10px;">5️⃣</div>
+                <p style="font-size: 0.85rem;">Tamamlandı</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+## 3. ZARAFETİN AKIŞI
+
+```html
+<!-- ZARAFETİN AKIŞI -->
+<section id="zarafet-akisi">
+    <div class="container">
+        <h2><span class="section-icon">✨</span> Zarafetin Akışı</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+            5 Adımda Tezahür Mekanizması
+        </p>
+        
+        <div class="dua-box">
+            <h4 style="color: #22C55E; margin-bottom: 10px;">🙏 Koruma Duası</h4>
+            <p style="font-style: italic;">"Her şeye kadir olan Allah adıyla, kimse kötülük yapamaz. O işitendir, bilendir."</p>
+            <p style="font-size: 0.85rem; margin-top: 10px; color: #999;">Açılış ve kapanış için</p>
+        </div>
+        
+        <div class="kristal-box">
+            <h4 style="color: #3B82F6; margin-bottom: 10px;">💧 Su Kristali Tekniği</h4>
+            <p>Buzun çözülüp tekrar donması gibi. Her dondurduğunda kristal daha düzenli oluyor. Nihayetinde mükemmel kristal oluşuyor.</p>
+        </div>
+        
+        <div class="zarafet-flow">
+            <div class="flow-step step-1">
+                <h3 style="color: #8B5CF6; margin-bottom: 15px;">1. Mevcudu Bırakıyorum</h3>
+                <div class="divine-names">
+                    <div class="divine-name">El Afuvv</div>
+                    <div class="divine-name">El Müntekim</div>
+                </div>
+            </div>
+            
+            <div class="flow-arrow">↓</div>
+            
+            <div class="flow-step step-2">
+                <h3 style="color: #3B82F6; margin-bottom: 15px;">2. Yeniye İzin Veriyorum</h3>
+                <div class="divine-names">
+                    <div class="divine-name">El Vekil</div>
+                    <div class="divine-name">El Kadir</div>
+                    <div class="divine-name">El Fettah</div>
+                </div>
+            </div>
+            
+            <div class="flow-arrow">↓</div>
+            
+            <div class="flow-step step-3">
+                <h3 style="color: #14B8A6; margin-bottom: 15px;">3. Omurga Başı Soğancık</h3>
+                <div class="divine-names">
+                    <div class="divine-name">El Kuddüs</div>
+                    <div class="divine-name">El Aziz</div>
+                    <div class="divine-name">El Cebbar</div>
+                    <div class="divine-name">El Zahir</div>
+                </div>
+            </div>
+            
+            <div class="flow-arrow">↓</div>
+            
+            <div class="flow-step step-4">
+                <h3 style="color: #22C55E; margin-bottom: 15px;">4. Zarafetle Kabul ⭐</h3>
+                <div class="divine-names">
+                    <div class="divine-name highlight">El Latif</div>
+                    <div class="divine-name">El Kerim</div>
+                    <div class="divine-name">Er Rahim</div>
+                    <div class="divine-name">El Cemil</div>
+                    <div class="divine-name">Es Sabur</div>
+                </div>
+            </div>
+            
+            <div class="flow-arrow">↓</div>
+            
+            <div class="flow-step step-5">
+                <h3 style="color: #FFD700; margin-bottom: 15px;">5. Allah'ın Nuru'na Bağla</h3>
+                <p style="font-size: 1.2rem; text-align: center;">✨</p>
+            </div>
+        </div>
+    </div>
+</section>
+```
+
+BU 3 SECTION'I 8 KALKAN SONRASINA EKLE!
