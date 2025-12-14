@@ -49,20 +49,47 @@ Purple (#7C3AED) + Orange (#F59E0B) + Gold (#FFD700)
 
 ## 🔧 ÇALIŞMA PRENSİPLERİ
 
+### KEMAL'İN KURALLARI (14 Aralık 2025)
+**ASLA UNUTMA - MOBİL ÖNCELİKLİ GELİŞTİRME:**
+
+1. **Her Push ÖNCE Test**
+   - DevTools → Mobile view
+   - 3 farklı boyut test et (iPhone SE, iPhone 12, iPad)
+   - Screenshot al
+   - Kemal'e göster: "Test ettim, şu boyutlarda çalışıyor"
+
+2. **"BİLMİYORUM" YASAK**
+   - Sorun varsa: "Şu sorunu gördüm, şöyle düzeltiyorum"
+   - "Cache bekle" = Kabul edilmez
+   - Her zaman somut çözüm sun
+
+3. **Mobile First**
+   - Kullanıcıların %70'i mobilde
+   - Önce mobil yap, sonra PC
+   - Test sırası: iPhone SE → iPhone 12 → iPad
+
+4. **Test Protokolü**
+   - iPhone SE (375x667) - küçük ekran
+   - iPhone 12 (390x844) - orta ekran
+   - iPad (768x1024) - tablet
+   - Hepsinde scroll, click, navigation test
+
+### Genel Prensipler
 1. **Küçük görevler** - Her push bağımsız
 2. **Sık commit** - Her adımı kaydet
 3. **Clear logs** - Sorunları dokümante et
 4. **Never block** - Sorun varsa log + devam et
+5. **Test first** - Push etmeden önce test
 
 ---
 
 ## 📊 DERS DURUMU
 
 **Ders 1:** ✅ Complete (9 section, ~1900 lines)  
-**Ders 2:** 🔄 85% (CSS complete, HTML assembly pending)  
+**Ders 2:** 🔄 90% (CSS complete, HTML assembly pending)  
 **Ders 3-10:** ⏳ Waiting
 
 ---
 
-**Son Güncelleme:** 14 Aralık 2025, 19:17  
-**Sonraki Adım:** CHECKPOINT_DERS2.md oku, manual assembly complete
+**Son Güncelleme:** 14 Aralık 2025, 22:12  
+**Sonraki Adım:** Mobile scroll test results, then continue
