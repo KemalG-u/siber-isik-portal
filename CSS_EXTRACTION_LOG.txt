@@ -1,0 +1,25 @@
+# 🌙 GECE GÖREVİ - CSS EXTRACTION LOG
+
+**Zaman:** 19:02
+
+## ADIM 1: CSS Extraction
+
+**Komut:**
+```powershell
+Get-Content lessons\ders-2.html | Select-Object -Skip 12 -First 2531 | Out-File lessons\ders-2.css
+```
+
+**Sonuç:**
+- CSS lines 13-2543 extracted
+- ders-2.css created
+- ~2530 lines
+
+## SONRAKI ADIMLAR:
+1. ✅ CSS extract edildi
+2. [ ] Görev 3 CSS ekle (~400 satır)
+3. [ ] HTML'de <link> ekle
+4. [ ] <style> tag'ini kaldır
+5. [ ] 4 section HTML ekle
+6. [ ] Push
+
+Devam ediyorum...
