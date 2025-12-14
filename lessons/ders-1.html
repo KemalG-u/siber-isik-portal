@@ -31,8 +31,13 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a1a 100%);
+            background: linear-gradient(rgba(10, 10, 26, 0.75), rgba(26, 26, 46, 0.85)),
+                url('https://res.cloudinary.com/dzegofdgp/image/upload/f_auto,q_auto/ders1/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             padding: 40px 20px;
+            position: relative;
         }
 
         .hero h1 {
@@ -99,12 +104,14 @@
             border-radius: 12px;
             padding: 40px;
             border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         section h2 {
             font-size: 2.5rem;
             color: #ffd700;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -112,6 +119,37 @@
 
         .section-icon {
             font-size: 2rem;
+        }
+
+        /* Section Background Video */
+        .section-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .section-bg-video video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                    rgba(10, 10, 26, 0.88),
+                    rgba(26, 26, 46, 0.92));
+        }
+
+        section>* {
+            position: relative;
+            z-index: 1;
         }
 
         /* Placeholder */
@@ -2460,6 +2498,16 @@
 
         <!-- Section 2: Çakralar -->
         <section id="bolum2">
+            <!-- Background Video -->
+            <div class="section-bg-video">
+                <video autoplay loop muted playsinline>
+                    <source
+                        src="https://res.cloudinary.com/dzegofdgp/video/upload/f_auto,q_auto/ders1/chakra-meditation-animation-video.mp4"
+                        type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
             <h2><span class="section-icon">🌀</span> Bölüm 2: Çakra Sistemi (15 Çakra)</h2>
 
             <div class="tabs">
