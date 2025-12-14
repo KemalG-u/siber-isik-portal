@@ -1441,6 +1441,142 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
+
+        /* ===== SEANS PROTOKOLÜ TIMELINE ===== */
+        .protokol-timeline {
+            max-width: 800px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .protokol-timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #FFD700, #9370DB);
+        }
+
+        .protokol-adim {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 100px;
+        }
+
+        .adim-marker {
+            position: absolute;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0a0a1a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            z-index: 2;
+        }
+
+        .protokol-adim.opsiyonel .adim-marker {
+            background: linear-gradient(135deg, #9370DB, #6B4BA1);
+            color: #fff;
+        }
+
+        .protokol-adim.kapanis .adim-marker {
+            background: linear-gradient(135deg, #00C851, #007E33);
+            color: #fff;
+        }
+
+        .adim-icerik {
+            background: rgba(26, 26, 46, 0.9);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .protokol-adim.opsiyonel .adim-icerik {
+            border-color: rgba(147, 112, 219, 0.4);
+        }
+
+        .protokol-adim.kapanis .adim-icerik {
+            border-color: rgba(0, 200, 81, 0.4);
+        }
+
+        .adim-icerik:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .adim-icerik h4 {
+            color: #FFD700;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .adim-icerik code {
+            display: block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            border-left: 3px solid #FFD700;
+        }
+
+        .adim-icerik p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .badge.opsiyonel {
+            background: rgba(147, 112, 219, 0.3);
+            color: #9370DB;
+            border: 1px solid #9370DB;
+        }
+
+        .badge.zorunlu {
+            background: rgba(0, 200, 81, 0.3);
+            color: #00C851;
+            border: 1px solid #00C851;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .ipucu {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #FFD700;
+        }
     </style>
 </head>
 
@@ -1842,6 +1978,82 @@
                 <strong>Not:</strong> Çok derin ve yorucu çalışmadan bahsetmiyoruz.
                 Daha soft, daha yüzeysel ama gerçekten karşılığı olan maddeler.
             </p>
+        </section>
+
+        <!-- NEW SECTION: Seans Protokolü -->
+        <section class="pratik seans-protokol" id="seansProtokol">
+            <h2><span class="section-icon">🌟</span> Seans Yapma Protokolü</h2>
+
+            <p style="text-align: center; font-size: 1.2rem; margin: 20px 0 40px;">
+                Her seans için takip edilecek 7 adımlık standart protokol
+            </p>
+
+            <div class="protokol-timeline">
+                <div class="protokol-adim" data-adim="1">
+                    <div class="adim-marker">1</div>
+                    <div class="adim-icerik">
+                        <h4>Sistemi Aktive Et</h4>
+                        <code>"[Kendi verdiğin isim]'in gücü aktif şimdi"</code>
+                        <p class="ipucu">💡 Örnek: "Yücelin gücü aktif şimdi"</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim opsiyonel" data-adim="2">
+                    <div class="adim-marker">2</div>
+                    <div class="adim-icerik">
+                        <span class="badge opsiyonel">Opsiyonel ama Faydalı</span>
+                        <h4>İlahi Nur Aç</h4>
+                        <code>"İlahi nur enerji alanı aktif şimdi"</code>
+                        <p>Ortamı şifalı enerjiyle kaplıyor</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim opsiyonel" data-adim="3">
+                    <div class="adim-marker">3</div>
+                    <div class="adim-icerik">
+                        <span class="badge opsiyonel">Opsiyonel ama Faydalı</span>
+                        <h4>Altın Alev Aç</h4>
+                        <code>"Altın alev enerji alanı aktif şimdi"</code>
+                        <p>Foton enerjileri ortama geliyor</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim" data-adim="4">
+                    <div class="adim-marker">4</div>
+                    <div class="adim-icerik">
+                        <h4>Combo Paket</h4>
+                        <code>"Combo paket aktif şimdi"</code>
+                        <p>12 madde arka planda çalışmaya başlıyor</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim" data-adim="5">
+                    <div class="adim-marker">5</div>
+                    <div class="adim-icerik">
+                        <h4>Asıl Niyet</h4>
+                        <code>"[Kişi]'nın [sorun]'una niyet ediyorum"</code>
+                        <p>Çalışmanın amacını belirt</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim" data-adim="6">
+                    <div class="adim-marker">6</div>
+                    <div class="adim-icerik">
+                        <h4>Akışa Bırak</h4>
+                        <p>Seans kendi kendine bitene kadar hazır bulun</p>
+                        <p class="ipucu">💡 İmgelemeyle desteklersen daha güçlü olur</p>
+                    </div>
+                </div>
+
+                <div class="protokol-adim kapanis" data-adim="7">
+                    <div class="adim-marker">✨</div>
+                    <div class="adim-icerik">
+                        <span class="badge zorunlu">HER ZAMAN YAP</span>
+                        <h4>Kapanış</h4>
+                        <code>"Hizalanmaya, dengelenmeye, açığa çıkan çöplerin kaynağa gönderilmesine ve fiziksel bedene enerji dolumuna niyet ediyorum."</code>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Section 1: Uyumlamalar -->
