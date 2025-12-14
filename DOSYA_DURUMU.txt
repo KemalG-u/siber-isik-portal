@@ -1,0 +1,16 @@
+# ⚠️ DOSYA DURUMU
+
+**Git'te:** ders-2.css var, ders-2.html YOK  
+**Lessons/ klasöründe:** Sadece ders-2.css var
+
+## SONUÇ:
+ders-2.html dosyası kayıp/silinmiş.
+
+## ÇÖZÜM SEÇENEKLERİ:
+1. Ders-1.html'i template olarak kullan
+2. Baştan minimal ders-2.html oluştur (CSS link zaten hazır)
+3. Yarın Claude ile yeniden oluştur
+
+**ŞİMDİ:** Cloudinary upload'a geçiyorum.
+
+Dosya yarın hallolur, CSS zaten hazır!
