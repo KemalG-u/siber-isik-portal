@@ -16,16 +16,28 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            /* iOS smooth scroll */
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #0a0a1a;
             color: #e0e0e0;
             line-height: 1.6;
+            touch-action: pan-y;
+            /* Allow vertical scrolling on touch devices */
         }
 
         /* Hero Section */
         .hero {
-            height: 60vh;
+            min-height: 60vh;
+            /* Changed from fixed height */
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
