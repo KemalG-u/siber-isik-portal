@@ -3109,3 +3109,94 @@
         height: 200px;
     }
 }
+
+
+/* PART 3 FINAL */
+/* VAGUS & FOOTER CSS */
+.vagus-section {
+    background: #0f0524;
+    padding: 4rem 2rem;
+}
+
+.nerve-tree {
+    width: 200px;
+    height: 300px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.1));
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+}
+
+.practice-box {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10B981;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+
+.mantra {
+    font-size: 1.5rem;
+    color: #FFD700;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.closing-section {
+    background: linear-gradient(135deg, #1a0a2e 0%, #004d40 100%);
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.seljuk-star {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    background: #FFD700;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulseSlow 3s infinite;
+}
+
+.final-word {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.site-footer {
+    background: #000;
+    border-top: 4px solid #FFD700;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.nav-btn {
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn:hover {
+    background: #FFD700;
+    color: #000;
+}
+
+@keyframes pulseSlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
